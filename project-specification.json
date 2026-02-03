@@ -129,5 +129,8 @@
       "configuration": "jvmspec-configuration"
     }
   },
-  "javaVersion": "25"
+  "javaVersion": "25",
+  "entryPoints": {
+    "launcher": "com.seanshubin.inversion.guard.launcher.InversionGuardApp"
+  }
 }
