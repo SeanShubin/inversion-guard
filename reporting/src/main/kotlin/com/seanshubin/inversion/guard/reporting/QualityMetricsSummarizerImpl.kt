@@ -18,7 +18,7 @@ class QualityMetricsSummarizerImpl(
         val metrics = QualityMetrics(
             staticInvocationsThatShouldBeInverted = count
         )
-        val path = outputDir.resolve("quality-metrics.json")
+        val path = outputDir.resolve(ReportCategory.COUNT.directory).resolve("quality-metrics.json")
         val command = CreateJsonFileCommand(path, metrics)
         return listOf(command)
     }

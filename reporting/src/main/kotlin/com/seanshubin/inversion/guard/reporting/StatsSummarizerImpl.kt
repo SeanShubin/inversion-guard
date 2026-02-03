@@ -39,7 +39,7 @@ class StatsSummarizerImpl(
                 registeredLocalPatterns,
                 registeredPatterns
             )
-            val path = outputDir.resolve("stats-$category.txt")
+            val path = outputDir.resolve(ReportCategory.BROWSE.directory).resolve("stats-$category.txt")
             CreateFileCommand(path, listOf(categoryTree))
         }
 

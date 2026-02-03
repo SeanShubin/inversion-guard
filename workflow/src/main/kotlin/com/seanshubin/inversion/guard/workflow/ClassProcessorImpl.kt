@@ -10,6 +10,7 @@ import com.seanshubin.inversion.guard.reporting.QualityMetricsSummarizer
 import com.seanshubin.inversion.guard.reporting.QualityMetricsDetailSummarizer
 import com.seanshubin.inversion.guard.reporting.HtmlReportSummarizer
 import com.seanshubin.inversion.guard.reporting.HtmlStatsSummarizer
+import com.seanshubin.inversion.guard.reporting.ReportCategory
 
 import com.seanshubin.inversion.guard.jvmspec.infrastructure.filesystem.PathUtil.removeExtension
 import com.seanshubin.inversion.guard.jvmspec.model.api.JvmClass
@@ -23,7 +24,7 @@ class ClassProcessorImpl(
 ) : ClassProcessor {
     override fun processClass(classAnalysis: ClassAnalysis): List<Command> {
         val relativePath = baseDir.relativize(classAnalysis.jvmClass.origin)
-        val baseFileName = outputDir.resolve(relativePath).removeExtension("class")
+        val baseFileName = outputDir.resolve(ReportCategory.BROWSE.directory).resolve(relativePath).removeExtension("class")
         val disassemblyCommands = createDisassemblyCommands(baseFileName, classAnalysis.jvmClass)
         return disassemblyCommands
     }

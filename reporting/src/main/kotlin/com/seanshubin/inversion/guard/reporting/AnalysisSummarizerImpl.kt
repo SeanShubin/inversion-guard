@@ -23,7 +23,7 @@ class AnalysisSummarizerImpl(
             })
         )
         val reportTrees = sorted.map(::classReport)
-        val path = outputDir.resolve("summary.txt")
+        val path = outputDir.resolve(ReportCategory.BROWSE.directory).resolve("summary.txt")
         val createFileCommand = CreateFileCommand(path, reportTrees)
         return listOf(createFileCommand)
     }

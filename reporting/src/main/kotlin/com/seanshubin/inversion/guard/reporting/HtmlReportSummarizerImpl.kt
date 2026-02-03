@@ -29,10 +29,10 @@ class HtmlReportSummarizerImpl(
         }
 
         val indexHtml = generateIndexHtml(staticInvocationsThatShouldBeInverted, detailReport, classPathMap)
-        val indexCommand = CreateTextFileCommand(outputDir.resolve("index.html"), indexHtml)
+        val indexCommand = CreateTextFileCommand(outputDir.resolve(ReportCategory.BROWSE.directory).resolve("index.html"), indexHtml)
 
         val disassemblyIndexHtml = generateDisassemblyIndexHtml(analysisList, classPathMap)
-        val disassemblyIndexCommand = CreateTextFileCommand(outputDir.resolve("disassembly.html"), disassemblyIndexHtml)
+        val disassemblyIndexCommand = CreateTextFileCommand(outputDir.resolve(ReportCategory.BROWSE.directory).resolve("disassembly.html"), disassemblyIndexHtml)
 
         val classPageCommands = analysisList.map { analysis ->
             generateClassDisassemblyPage(analysis)
@@ -371,7 +371,7 @@ class HtmlReportSummarizerImpl(
         val inputStream = classLoader.getResourceAsStream(resourcePath)
             ?: throw RuntimeException("Unable to load resource: $resourcePath")
         val content = inputStream.bufferedReader(StandardCharsets.UTF_8).use { it.readText() }
-        val path = outputDir.resolve(resourceName)
+        val path = outputDir.resolve(ReportCategory.BROWSE.directory).resolve(resourceName)
         return CreateTextFileCommand(path, content)
     }
 
@@ -411,7 +411,7 @@ class HtmlReportSummarizerImpl(
         val html =
             generateClassDisassemblyHtml(analysis.jvmClass.thisClassName, trees, cssPath, indexPath, textFileName)
 
-        val path = outputDir.resolve(relativePath)
+        val path = outputDir.resolve(ReportCategory.BROWSE.directory).resolve(relativePath)
         return CreateTextFileCommand(path, html)
     }
 

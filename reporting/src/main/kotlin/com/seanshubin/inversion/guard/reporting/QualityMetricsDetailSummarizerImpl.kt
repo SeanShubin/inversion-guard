@@ -16,7 +16,7 @@ class QualityMetricsDetailSummarizerImpl(
 ) : QualityMetricsDetailSummarizer {
     override fun summarize(analysisList: List<ClassAnalysis>): List<Command> {
         val report = reportGenerator.generate(analysisList)
-        val path = outputDir.resolve("quality-metrics-staticInvocationsThatShouldBeInverted.json")
+        val path = outputDir.resolve(ReportCategory.DIFF.directory).resolve("quality-metrics-staticInvocationsThatShouldBeInverted.json")
         val command = CreateJsonFileCommand(path, report)
         return listOf(command)
     }

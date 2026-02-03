@@ -84,7 +84,7 @@ class HtmlStatsSummarizerImpl(
         val htmlLines = html.toLines()
         val htmlContent = (listOf(doctype) + htmlLines).joinToString("\n")
 
-        return CreateTextFileCommand(outputDir.resolve("filters.html"), htmlContent)
+        return CreateTextFileCommand(outputDir.resolve(ReportCategory.BROWSE.directory).resolve("filters.html"), htmlContent)
     }
 
     private fun createHead(title: String): HtmlElement {
@@ -251,7 +251,7 @@ class HtmlStatsSummarizerImpl(
         val htmlLines = html.toLines()
         val htmlContent = (listOf(doctype) + htmlLines).joinToString("\n")
 
-        return CreateTextFileCommand(outputDir.resolve("filters-$category.html"), htmlContent)
+        return CreateTextFileCommand(outputDir.resolve(ReportCategory.BROWSE.directory).resolve("filters-$category.html"), htmlContent)
     }
 
     private fun createSectionPage(
@@ -295,7 +295,7 @@ class HtmlStatsSummarizerImpl(
         val htmlLines = html.toLines()
         val htmlContent = (listOf(doctype) + htmlLines).joinToString("\n")
 
-        return CreateTextFileCommand(outputDir.resolve("filters-$category-$sectionName.html"), htmlContent)
+        return CreateTextFileCommand(outputDir.resolve(ReportCategory.BROWSE.directory).resolve("filters-$category-$sectionName.html"), htmlContent)
     }
 
     private fun formatSectionName(sectionName: String): String {
