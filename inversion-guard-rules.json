@@ -1,0 +1,819 @@
+{
+  "core": [
+    "Boolean:.*",
+    "Byte:.*",
+    "Character:.*",
+    "Double:.*",
+    "Enum:valueOf:.*",
+    "Float:.*",
+    "Integer:.*",
+    "Long:.*",
+    "Math:abs:.*",
+    "Math:ceil:.*",
+    "Math:log:.*",
+    "Math:max:.*",
+    "Math:min:.*",
+    "Math:pow:.*",
+    "Math:round:.*",
+    "Math:signum:.*",
+    "Short:hashCode:.*",
+    "Short:valueOf:.*",
+    "String:.*",
+    "System:arraycopy:.*",
+    "Void:TYPE:.*",
+    "java.awt.Color:.*",
+    "java.awt.Font:.*",
+    "java.math.BigDecimal:.*",
+    "java.math.BigInteger:.*",
+    "java.math.MathContext:.*",
+    "java.math.RoundingMode:.*",
+    "java.net.URI:create:.*",
+    "java.net.URLDecoder:.*",
+    "java.net.URLEncoder:.*",
+    "java.nio.ByteBuffer:.*",
+    "java.nio.CharBuffer:.*",
+    "java.nio.charset.CodingErrorAction:.*",
+    "java.nio.charset.StandardCharsets:.*",
+    "java.nio.file.FileVisitResult:.*",
+    "java.nio.file.Path:.*",
+    "java.nio.file.Paths:.*",
+    "java.nio.file.StandardCopyOption:.*",
+    "java.nio.file.StandardOpenOption:.*",
+    "java.nio.file.attribute.FileTime:.*",
+    "java.nio.file.attribute.PosixFilePermission:.*",
+    "java.sql.Date:.*",
+    "java.sql.Timestamp:.*",
+    "java.text.MessageFormat:format:.*",
+    "java.time.Duration:.*",
+    "java.time.Instant:ofEpochMilli:.*",
+    "java.time.Instant:MIN:.*",
+    "java.time.Instant:from:.*",
+    "java.time.Instant:parse:.*",
+    "java.time.LocalDate:of:.*",
+    "java.time.LocalDateTime:of:.*",
+    "java.time.LocalDateTime:ofInstant:.*",
+    "java.time.LocalDateTime:parse:.*",
+    "java.time.Month:.*",
+    "java.time.Period:.*",
+    "java.time.Year:.*",
+    "java.time.ZoneOffset:.*",
+    "java.time.ZonedDateTime:parse:.*",
+    "java.time.format.DateTimeFormatter:.*",
+    "java.time.temporal.ChronoUnit:.*",
+    "java.util.Arrays:.*",
+    "java.util.Collections:.*",
+    "java.util.Comparator:.*",
+    "java.util.Date:.*",
+    "java.util.EnumSet:.*",
+    "java.util.Locale:.*",
+    "java.util.Objects:.*",
+    "java.util.Optional:.*",
+    "java.util.UUID:fromString:.*",
+    "java.util.concurrent.ConcurrentHashMap:.*",
+    "java.util.concurrent.TimeUnit:.*",
+    "java.util.regex.Pattern:.*",
+    "java.util.stream.Collectors:.*",
+    "java.util.stream.IntStream:.*",
+    "java.util.stream.Stream:.*",
+    "java.util.stream.StreamSupport:stream:.*",
+    "javax.json.Json:createArrayBuilder:.*",
+    "javax.mail.Message.*",
+    "javax.mail.internet.InternetAddress:.*",
+    "javax.ws.rs.core.Response.*",
+    "javax.xml.bind.DatatypeConverter:.*",
+    "kotlin.text.Charsets:.*",
+    "org.joda.time.DateTime:parse:.*",
+    "org.joda.time.DateTimeFieldType:.*",
+    "org.joda.time.DateTimeZone:forID:.*",
+    "org.joda.time.DateTimeZone:UTC:.*",
+    "org.joda.time.Days:.*",
+    "org.joda.time.Hours:.*",
+    "org.joda.time.Minutes:.*",
+    "org.joda.time.Months:.*",
+    "org.joda.time.PeriodType:days:.*",
+    "org.joda.time.Years:yearsBetween:.*",
+    "org.joda.time.format.DateTimeFormat:.*"
+  ],
+  "boundary": [
+    "Class:forName:.*",
+    "Math:random:.*",
+    "Runtime:getRuntime:.*",
+    "System:currentTimeMillis:.*",
+    "System:clearProperty:.*",
+    "System:console:.*",
+    "System:err:.*",
+    "System:exit:.*",
+    "System:gc:.*",
+    "System:getProperties:.*",
+    "System:getProperty:.*",
+    "System:getSecurityManager:.*",
+    "System:getenv:.*",
+    "System:identityHashCode:.*",
+    "System:in:.*",
+    "System:inheritedChannel:.*",
+    "System:lineSeparator:.*",
+    "System:load:.*",
+    "System:loadLibrary:.*",
+    "System:mapLibraryName:.*",
+    "System:nanoTime:.*",
+    "System:out:.*",
+    "System:runFinalization:.*",
+    "System:setErr:.*",
+    "System:setIn:.*",
+    "System:setOut:.*",
+    "System:setProperty:.*",
+    "System:setSecurityManager:.*",
+    "Thread:currentThread:.*",
+    "Thread:sleep:.*",
+    "java.awt.event.KeyEvent:getKeyText:.*",
+    "java.beans.PropertyEditorManager:findEditor:.*",
+    "java.io.File:createTempFile:.*",
+    "java.io.File:separator:.*",
+    "java.io.File:separatorChar:.*",
+    "java.net.InetAddress:getByName:.*",
+    "java.net.InetAddress:getLocalHost:.*",
+    "java.net.NetworkInterface:getNetworkInterfaces:.*",
+    "java.net.URLConnection:guessContentTypeFromStream:.*",
+    "java.nio.charset.Charset:defaultCharset:.*",
+    "java.nio.charset.Charset:forName:.*",
+    "java.nio.charset.Charset:isSupported:.*",
+    "java.nio.file.FileSystems:.*",
+    "java.nio.file.FileSystems:getDefault:.*",
+    "java.nio.file.Files:.*",
+    "java.security.KeyStore:getDefaultType:.*",
+    "java.security.KeyStore:getInstance:.*",
+    "java.security.MessageDigest:getInstance:.*",
+    "java.security.Security:addProvider:.*",
+    "java.security.Security:getProvider:.*",
+    "java.sql.DriverManager:getConnection:.*",
+    "java.sql.DriverManager:registerDriver:.*",
+    "java.text.Collator:getInstance:.*",
+    "java.text.DateFormat:getDateInstance:.*",
+    "java.text.DateFormat:getDateTimeInstance:.*",
+    "java.text.DecimalFormat:getInstance:.*",
+    "java.text.NumberFormat:getCurrencyInstance:.*",
+    "java.text.NumberFormat:getInstance:.*",
+    "java.text.NumberFormat:getNumberInstance:.*",
+    "java.text.NumberFormat:getPercentInstance:.*",
+    "java.time.Clock:system:.*",
+    "java.time.Clock:systemDefaultZone:.*",
+    "java.time.Clock:systemUTC:.*",
+    "java.time.Instant:now:.*",
+    "java.time.LocalDate:now:.*",
+    "java.time.LocalDateTime:now:.*",
+    "java.time.ZoneId:of:.*",
+    "java.time.ZoneId:systemDefault:.*",
+    "java.time.ZonedDateTime:now:.*",
+    "java.util.Base64:getDecoder:.*",
+    "java.util.Base64:getEncoder:.*",
+    "java.util.Calendar:getInstance:.*",
+    "java.util.Currency:getInstance:.*",
+    "java.util.GregorianCalendar:getInstance:.*",
+    "java.util.ResourceBundle:getBundle:.*",
+    "java.util.TimeZone:getAvailableIDs:.*",
+    "java.util.TimeZone:getDefault:.*",
+    "java.util.TimeZone:getTimeZone:.*",
+    "java.util.UUID:randomUUID:.*",
+    "java.util.concurrent.Executors:.*",
+    "javax.crypto.Cipher:getInstance:.*",
+    "javax.crypto.KeyGenerator:getInstance:.*",
+    "javax.crypto.Mac:getInstance:.*",
+    "javax.crypto.SecretKeyFactory:getInstance:.*",
+    "javax.imageio.*",
+    "javax.mail.Session:getDefaultInstance:.*",
+    "javax.mail.Session:getInstance:.*",
+    "javax.mail.Transport:send:.*",
+    "javax.mail.internet.MimeUtility:.*",
+    "javax.media.jai.JAI:.*",
+    "javax.net.ssl.SSLContext:getInstance:.*",
+    "javax.sql.rowset.RowSetProvider:newFactory:.*",
+    "javax.validation.Validation:buildDefaultValidatorFactory:.*",
+    "javax.xml.bind.JAXBContext:newInstance:.*",
+    "javax.xml.parsers.DocumentBuilderFactory:newInstance:.*",
+    "javax.xml.stream.XMLInputFactory:newFactory:.*",
+    "javax.xml.transform.TransformerFactory:newInstance:.*",
+    "management.ManagementFactory:.*",
+    "org.joda.time.DateTime:now:.*",
+    "org.joda.time.DateTimeComparator:getInstance:.*",
+    "org.joda.time.DateTimeUtils:currentTimeMillis:.*",
+    "org.joda.time.DateTimeZone:getDefault:.*",
+    "org.joda.time.LocalDate:now:.*"
+  ],
+  "categories": {
+    "static-pass-through": {
+      "methodConstraints": null,
+      "rules": [
+        {
+          "type": "zero-or-more",
+          "predicate": {
+            "op": "contains",
+            "value": "load"
+          }
+        },
+        {
+          "type": "exactly",
+          "count": 1,
+          "predicate": {
+            "op": "equals",
+            "value": "invokestatic"
+          }
+        },
+        {
+          "type": "exactly",
+          "count": 1,
+          "predicate": {
+            "op": "contains",
+            "value": "return"
+          }
+        },
+        {
+          "type": "at-end"
+        }
+      ]
+    },
+    "delegate-pass-through": {
+      "methodConstraints": null,
+      "rules": [
+        {
+          "type": "zero-or-more",
+          "predicate": {
+            "op": "contains",
+            "value": "load"
+          }
+        },
+        {
+          "type": "exactly",
+          "count": 1,
+          "predicate": {
+            "op": "equals",
+            "value": "getfield"
+          }
+        },
+        {
+          "type": "zero-or-more",
+          "predicate": {
+            "op": "contains",
+            "value": "load"
+          }
+        },
+        {
+          "type": "exactly",
+          "count": 1,
+          "predicate": {
+            "op": "equals",
+            "value": "invokeinterface"
+          }
+        },
+        {
+          "type": "exactly",
+          "count": 1,
+          "predicate": {
+            "op": "contains",
+            "value": "return"
+          }
+        },
+        {
+          "type": "at-end"
+        }
+      ]
+    },
+    "catch-rethrow": {
+      "methodConstraints": null,
+      "rules": [
+        {
+          "type": "exactly",
+          "count": 1,
+          "predicate": {
+            "op": "contains",
+            "value": "load"
+          }
+        },
+        {
+          "type": "exactly",
+          "count": 1,
+          "predicate": {
+            "op": "equals",
+            "value": "getfield"
+          }
+        },
+        {
+          "type": "zero-or-more",
+          "predicate": {
+            "op": "contains",
+            "value": "load"
+          }
+        },
+        {
+          "type": "exactly",
+          "count": 1,
+          "predicate": {
+            "op": "equals",
+            "value": "invokeinterface"
+          }
+        },
+        {
+          "type": "exactly",
+          "count": 1,
+          "predicate": {
+            "op": "or",
+            "predicates": [
+              {
+                "op": "contains",
+                "value": "return"
+              },
+              {
+                "op": "equals",
+                "value": "goto"
+              }
+            ]
+          }
+        },
+        {
+          "type": "exactly",
+          "count": 1,
+          "predicate": {
+            "op": "contains",
+            "value": "store"
+          }
+        },
+        {
+          "type": "exactly",
+          "count": 1,
+          "predicate": {
+            "op": "equals",
+            "value": "new"
+          }
+        },
+        {
+          "type": "exactly",
+          "count": 1,
+          "predicate": {
+            "op": "equals",
+            "value": "dup"
+          }
+        },
+        {
+          "type": "exactly",
+          "count": 1,
+          "predicate": {
+            "op": "contains",
+            "value": "load"
+          }
+        },
+        {
+          "type": "exactly",
+          "count": 1,
+          "predicate": {
+            "op": "equals",
+            "value": "invokevirtual"
+          }
+        },
+        {
+          "type": "exactly",
+          "count": 1,
+          "predicate": {
+            "op": "contains",
+            "value": "load"
+          }
+        },
+        {
+          "type": "exactly",
+          "count": 1,
+          "predicate": {
+            "op": "equals",
+            "value": "invokespecial"
+          }
+        },
+        {
+          "type": "exactly",
+          "count": 1,
+          "predicate": {
+            "op": "contains",
+            "value": "throw"
+          }
+        },
+        {
+          "type": "zero-or-more",
+          "predicate": {
+            "op": "contains",
+            "value": "return"
+          }
+        },
+        {
+          "type": "at-end"
+        }
+      ]
+    },
+    "catch-rethrow-pass-through": {
+      "methodConstraints": null,
+      "rules": [
+        {
+          "type": "zero-or-more",
+          "predicate": {
+            "op": "contains",
+            "value": "load"
+          }
+        },
+        {
+          "type": "exactly",
+          "count": 1,
+          "predicate": {
+            "op": "equals",
+            "value": "invokestatic"
+          }
+        },
+        {
+          "type": "exactly",
+          "count": 1,
+          "predicate": {
+            "op": "or",
+            "predicates": [
+              {
+                "op": "contains",
+                "value": "return"
+              },
+              {
+                "op": "equals",
+                "value": "goto"
+              }
+            ]
+          }
+        },
+        {
+          "type": "zero-or-more",
+          "predicate": {
+            "op": "contains",
+            "value": "store"
+          }
+        },
+        {
+          "type": "exactly",
+          "count": 1,
+          "predicate": {
+            "op": "equals",
+            "value": "new"
+          }
+        },
+        {
+          "type": "exactly",
+          "count": 1,
+          "predicate": {
+            "op": "equals",
+            "value": "dup"
+          }
+        },
+        {
+          "type": "zero-or-more",
+          "predicate": {
+            "op": "contains",
+            "value": "load"
+          }
+        },
+        {
+          "type": "exactly",
+          "count": 1,
+          "predicate": {
+            "op": "equals",
+            "value": "invokevirtual"
+          }
+        },
+        {
+          "type": "zero-or-more",
+          "predicate": {
+            "op": "contains",
+            "value": "load"
+          }
+        },
+        {
+          "type": "exactly",
+          "count": 1,
+          "predicate": {
+            "op": "equals",
+            "value": "invokespecial"
+          }
+        },
+        {
+          "type": "exactly",
+          "count": 1,
+          "predicate": {
+            "op": "contains",
+            "value": "throw"
+          }
+        },
+        {
+          "type": "zero-or-more",
+          "predicate": {
+            "op": "contains",
+            "value": "return"
+          }
+        },
+        {
+          "type": "at-end"
+        }
+      ]
+    },
+    "default-constructor": {
+      "methodConstraints": {
+        "methodName": {
+          "op": "equals",
+          "value": "<init>"
+        }
+      },
+      "rules": [
+        {
+          "type": "exactly",
+          "count": 1,
+          "predicate": {
+            "op": "contains",
+            "value": "load"
+          }
+        },
+        {
+          "type": "exactly",
+          "count": 1,
+          "predicate": {
+            "op": "equals",
+            "value": "invokespecial"
+          }
+        },
+        {
+          "type": "exactly",
+          "count": 1,
+          "predicate": {
+            "op": "contains",
+            "value": "return"
+          }
+        },
+        {
+          "type": "at-end"
+        }
+      ]
+    },
+    "default-constructor-delegate": {
+      "methodConstraints": {
+        "methodName": {
+          "op": "equals",
+          "value": "<init>"
+        }
+      },
+      "rules": [
+        {
+          "type": "exactly",
+          "count": 1,
+          "predicate": {
+            "op": "contains",
+            "value": "load"
+          }
+        },
+        {
+          "type": "exactly",
+          "count": 1,
+          "predicate": {
+            "op": "equals",
+            "value": "invokespecial"
+          }
+        },
+        {
+          "type": "zero-or-more",
+          "predicate": {
+            "op": "contains",
+            "value": "load"
+          }
+        },
+        {
+          "type": "exactly",
+          "count": 1,
+          "predicate": {
+            "op": "equals",
+            "value": "putfield"
+          }
+        },
+        {
+          "type": "exactly",
+          "count": 1,
+          "predicate": {
+            "op": "contains",
+            "value": "return"
+          }
+        },
+        {
+          "type": "at-end"
+        }
+      ]
+    },
+    "singleton-getter": {
+      "methodConstraints": null,
+      "rules": [
+        {
+          "type": "exactly",
+          "count": 1,
+          "predicate": {
+            "op": "equals",
+            "value": "getstatic"
+          }
+        },
+        {
+          "type": "exactly",
+          "count": 1,
+          "predicate": {
+            "op": "equals",
+            "value": "ifnonnull"
+          }
+        },
+        {
+          "type": "exactly",
+          "count": 1,
+          "predicate": {
+            "op": "equals",
+            "value": "new"
+          }
+        },
+        {
+          "type": "exactly",
+          "count": 1,
+          "predicate": {
+            "op": "equals",
+            "value": "dup"
+          }
+        },
+        {
+          "type": "exactly",
+          "count": 1,
+          "predicate": {
+            "op": "equals",
+            "value": "invokespecial"
+          }
+        },
+        {
+          "type": "exactly",
+          "count": 1,
+          "predicate": {
+            "op": "equals",
+            "value": "putstatic"
+          }
+        },
+        {
+          "type": "exactly",
+          "count": 1,
+          "predicate": {
+            "op": "equals",
+            "value": "getstatic"
+          }
+        },
+        {
+          "type": "exactly",
+          "count": 1,
+          "predicate": {
+            "op": "contains",
+            "value": "return"
+          }
+        },
+        {
+          "type": "at-end"
+        }
+      ]
+    },
+    "singleton-static-initializer": {
+      "methodConstraints": null,
+      "rules": [
+        {
+          "type": "exactly",
+          "count": 1,
+          "predicate": {
+            "op": "equals",
+            "value": "new"
+          }
+        },
+        {
+          "type": "exactly",
+          "count": 1,
+          "predicate": {
+            "op": "equals",
+            "value": "dup"
+          }
+        },
+        {
+          "type": "exactly",
+          "count": 1,
+          "predicate": {
+            "op": "equals",
+            "value": "invokespecial"
+          }
+        },
+        {
+          "type": "exactly",
+          "count": 1,
+          "predicate": {
+            "op": "equals",
+            "value": "putstatic"
+          }
+        },
+        {
+          "type": "exactly",
+          "count": 1,
+          "predicate": {
+            "op": "contains",
+            "value": "return"
+          }
+        },
+        {
+          "type": "at-end"
+        }
+      ]
+    },
+    "singleton-getter-delegate": {
+      "methodConstraints": null,
+      "rules": [
+        {
+          "type": "exactly",
+          "count": 1,
+          "predicate": {
+            "op": "equals",
+            "value": "getstatic"
+          }
+        },
+        {
+          "type": "exactly",
+          "count": 1,
+          "predicate": {
+            "op": "equals",
+            "value": "ifnonnull"
+          }
+        },
+        {
+          "type": "exactly",
+          "count": 1,
+          "predicate": {
+            "op": "equals",
+            "value": "invokestatic"
+          }
+        },
+        {
+          "type": "zero-or-more",
+          "predicate": {
+            "op": "contains",
+            "value": "store"
+          }
+        },
+        {
+          "type": "exactly",
+          "count": 1,
+          "predicate": {
+            "op": "equals",
+            "value": "new"
+          }
+        },
+        {
+          "type": "exactly",
+          "count": 1,
+          "predicate": {
+            "op": "equals",
+            "value": "dup"
+          }
+        },
+        {
+          "type": "zero-or-more",
+          "predicate": {
+            "op": "contains",
+            "value": "load"
+          }
+        },
+        {
+          "type": "exactly",
+          "count": 1,
+          "predicate": {
+            "op": "equals",
+            "value": "invokespecial"
+          }
+        },
+        {
+          "type": "exactly",
+          "count": 1,
+          "predicate": {
+            "op": "equals",
+            "value": "putstatic"
+          }
+        },
+        {
+          "type": "exactly",
+          "count": 1,
+          "predicate": {
+            "op": "equals",
+            "value": "getstatic"
+          }
+        },
+        {
+          "type": "exactly",
+          "count": 1,
+          "predicate": {
+            "op": "contains",
+            "value": "return"
+          }
+        },
+        {
+          "type": "at-end"
+        }
+      ]
+    }
+  }
+}

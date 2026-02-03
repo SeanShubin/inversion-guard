@@ -1,0 +1,15 @@
+package com.seanshubin.inversion.guard.jvmspec.rules
+
+//
+// This file was imported from: ../jvmspec
+// Module: rules
+//
+// Before editing this file, consider whether updating the source project
+// and re-importing would be a better approach.
+//
+
+data class CategoryRuleSet(
+    val categories: Map<String, CategoryRule>,
+    val core: List<String> = emptyList(),
+    val boundary: List<String> = emptyList()
+)

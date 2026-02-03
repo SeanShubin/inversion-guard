@@ -1,0 +1,46 @@
+package com.seanshubin.inversion.guard.jvmspec.classfile.structure
+
+import com.seanshubin.inversion.guard.jvmspec.infrastructure.formatting.DataFormat.indent
+import com.seanshubin.inversion.guard.jvmspec.infrastructure.formatting.DataFormat.toDecHex
+import java.io.DataInput
+
+//
+// This file was imported from: ../jvmspec
+// Module: classfile
+//
+// Before editing this file, consider whether updating the source project
+// and re-importing would be a better approach.
+//
+
+data class ExceptionTable(
+    val startProgramCounter: UShort,
+    val endProgramCounter: UShort,
+    val handlerProgramCounter: UShort,
+    val catchType: UShort
+) {
+    fun lines(index: Int): List<String> {
+        val header = listOf("ExceptionTable[$index]")
+        val content = listOf(
+            "startProgramCounter=${startProgramCounter.toDecHex()}",
+            "endProgramCounter=${endProgramCounter.toDecHex()}",
+            "handlerProgramCounter=${handlerProgramCounter.toDecHex()}",
+            "catchType=${catchType.toDecHex()}"
+        ).map(indent)
+        return header + content
+    }
+
+    companion object {
+        fun fromDataInput(input: DataInput): ExceptionTable {
+            val startProgramCounter = input.readUnsignedShort().toUShort()
+            val endProgramCounter = input.readUnsignedShort().toUShort()
+            val handlerProgramCounter = input.readUnsignedShort().toUShort()
+            val catchType = input.readUnsignedShort().toUShort()
+            return ExceptionTable(
+                startProgramCounter,
+                endProgramCounter,
+                handlerProgramCounter,
+                catchType
+            )
+        }
+    }
+}

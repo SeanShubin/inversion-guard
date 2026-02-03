@@ -1,0 +1,53 @@
+package com.seanshubin.inversion.guard.workflow
+
+import com.seanshubin.inversion.guard.analysis.ClassAnalysis
+import com.seanshubin.inversion.guard.analysis.ClassAnalyzer
+import com.seanshubin.inversion.guard.command.Command
+import com.seanshubin.inversion.guard.command.CommandRunner
+import com.seanshubin.inversion.guard.command.CreateFileCommand
+import com.seanshubin.inversion.guard.fileselection.FileSelector
+import com.seanshubin.inversion.guard.reporting.QualityMetricsSummarizer
+import com.seanshubin.inversion.guard.reporting.QualityMetricsDetailSummarizer
+import com.seanshubin.inversion.guard.reporting.HtmlReportSummarizer
+import com.seanshubin.inversion.guard.reporting.HtmlStatsSummarizer
+
+import com.seanshubin.inversion.guard.jvmspec.analysis.statistics.Stats
+import com.seanshubin.inversion.guard.jvmspec.contract.FilesContract
+import com.seanshubin.inversion.guard.jvmspec.infrastructure.time.Timer
+import com.seanshubin.inversion.guard.jvmspec.model.conversion.Converter
+
+class Runner(
+    private val files: FilesContract,
+    private val fileSelector: FileSelector,
+    private val classAnalyzer: ClassAnalyzer,
+    private val qualityMetricsSummarizer: QualityMetricsSummarizer,
+    private val qualityMetricsDetailSummarizer: QualityMetricsDetailSummarizer,
+    private val htmlReportSummarizer: HtmlReportSummarizer,
+    private val htmlStatsSummarizer: HtmlStatsSummarizer,
+    private val stats: Stats,
+    private val classProcessor: ClassProcessor,
+    private val commandRunner: CommandRunner,
+    private val timer: Timer,
+    private val timeTakenEvent: (Long) -> Unit,
+    private val converter: Converter
+) : Runnable {
+    override fun run() {
+        val durationMillis = timer.withTimerMilliseconds {
+            val analysisList = fileSelector.map { file ->
+                val jvmClass = with(converter) { file.toJvmClass(files, file) }
+                classAnalyzer.analyzeClass(jvmClass)
+            }
+            val commands = analysisList.flatMap { analysis ->
+                classProcessor.processClass(analysis)
+            } + qualityMetricsSummarizer.summarize(
+                analysisList
+            ) + qualityMetricsDetailSummarizer.summarize(analysisList) + htmlReportSummarizer.summarize(analysisList) + htmlStatsSummarizer.summarize(
+                stats
+            )
+            commands.forEach { command ->
+                commandRunner.runCommand(command)
+            }
+        }
+        timeTakenEvent(durationMillis)
+    }
+}

@@ -1,0 +1,15 @@
+{
+  "inputDir" : ".",
+  "outputDir" : "generated/inversion-guard-report",
+  "classes" : {
+    "includeFile" : [ ".*/target/.*\\.class" ],
+    "excludeFile" : [ ],
+    "skipDir" : [ ]
+  },
+  "globalRules" : "inversion-guard-rules.json",
+  "localRules" : {
+    "core" : [ ],
+    "boundary" : [ ]
+  },
+  "failOnUnknown" : false
+}
