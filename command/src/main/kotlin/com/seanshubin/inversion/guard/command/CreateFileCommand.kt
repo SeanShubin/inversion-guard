@@ -1,6 +1,6 @@
 package com.seanshubin.inversion.guard.command
 
-import com.seanshubin.inversion.guard.appconfig.Environment
+import com.seanshubin.inversion.guard.runtime.Environment
 import com.seanshubin.inversion.guard.jvmspec.infrastructure.collections.Tree
 import java.nio.file.Path
 

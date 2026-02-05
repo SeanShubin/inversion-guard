@@ -53,10 +53,10 @@
         <module>file-selection</module>
         <module>analysis</module>
         <module>reporting</module>
-        <module>appconfig</module>
+        <module>runtime</module>
         <module>command</module>
         <module>workflow</module>
-        <module>launcher</module>
+        <module>composition</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

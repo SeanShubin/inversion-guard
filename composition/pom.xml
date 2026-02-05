@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>inversion-guard-launcher</artifactId>
+    <artifactId>inversion-guard-composition</artifactId>
     <dependencies>
         <dependency>
             <groupId>com.seanshubin.inversion.guard</groupId>
@@ -22,14 +22,14 @@
                 <artifactId>maven-assembly-plugin</artifactId>
                 <version>3.8.0</version>
                 <configuration>
-                    <finalName>inversion-guard-launcher</finalName>
+                    <finalName>inversion-guard-composition</finalName>
                     <appendAssemblyId>false</appendAssemblyId>
                     <descriptorRefs>
                         <descriptorRef>jar-with-dependencies</descriptorRef>
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>com.seanshubin.inversion.guard.launcher.InversionGuardApp</mainClass>
+                            <mainClass>com.seanshubin.inversion.guard.composition.InversionGuardApp</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

@@ -1,4 +1,4 @@
-package com.seanshubin.inversion.guard.appconfig
+package com.seanshubin.inversion.guard.runtime
 
 interface ErrorCountHolder {
     var errorCount: Int

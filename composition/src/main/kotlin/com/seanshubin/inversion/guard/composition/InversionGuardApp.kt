@@ -1,4 +1,4 @@
-package com.seanshubin.inversion.guard.launcher
+package com.seanshubin.inversion.guard.composition
 
 import com.seanshubin.inversion.guard.jvmspec.runtime.application.Integrations
 import com.seanshubin.inversion.guard.jvmspec.runtime.application.ProductionIntegrations

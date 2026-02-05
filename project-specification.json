@@ -96,15 +96,15 @@
     "reporting": [
       "analysis",
       "command",
-      "appconfig",
+      "runtime",
       "jvmspec-infrastructure",
       "jvmspec-output"
     ],
-    "appconfig": [
+    "runtime": [
       "jvmspec-contract"
     ],
     "command": [
-      "appconfig",
+      "runtime",
       "jvmspec-infrastructure"
     ],
     "workflow": [
@@ -112,11 +112,11 @@
       "analysis",
       "reporting",
       "command",
-      "appconfig",
+      "runtime",
       "jvmspec-configuration",
       "jvmspec-runtime"
     ],
-    "launcher": [
+    "composition": [
       "workflow"
     ]
   },
@@ -136,6 +136,6 @@
   },
   "javaVersion": "25",
   "entryPoints": {
-    "launcher": "com.seanshubin.inversion.guard.launcher.InversionGuardApp"
+    "composition": "com.seanshubin.inversion.guard.composition.InversionGuardApp"
   }
 }

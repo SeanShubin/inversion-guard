@@ -1,20 +1,19 @@
 package com.seanshubin.inversion.guard.workflow
 
-import com.seanshubin.inversion.guard.appconfig.ApplicationRunner
 import com.seanshubin.inversion.guard.jvmspec.configuration.FixedPathJsonFileKeyValueStoreFactory
 import com.seanshubin.inversion.guard.jvmspec.infrastructure.types.TypeSafety.toTypedList
 import com.seanshubin.inversion.guard.jvmspec.rules.RuleLoader
 import com.seanshubin.inversion.guard.jvmspec.runtime.application.Integrations
 import java.nio.file.Path
 
-class ConfiguredRunnerFactory(
+class ConfiguredRunnerFactory<T>(
     private val args: Array<String>,
-    private val createRunner: (Integrations, Configuration) -> ApplicationRunner,
+    private val createRunner: (Integrations, Configuration) -> T,
     private val keyValueStoreFactory: FixedPathJsonFileKeyValueStoreFactory,
     private val ruleLoader: RuleLoader,
     private val integrations: Integrations,
 ) {
-    fun createConfiguredRunner(): ApplicationRunner {
+    fun createConfiguredRunner(): T {
         val configPathName = args.getOrNull(0) ?: "inversion-guard-config.json"
         val configPath = Path.of(configPathName)
         val keyValueStore = keyValueStoreFactory.create(configPath)

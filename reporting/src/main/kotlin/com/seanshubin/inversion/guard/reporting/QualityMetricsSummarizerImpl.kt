@@ -2,7 +2,7 @@ package com.seanshubin.inversion.guard.reporting
 
 import com.seanshubin.inversion.guard.analysis.ClassAnalysis
 import com.seanshubin.inversion.guard.analysis.InvocationType
-import com.seanshubin.inversion.guard.appconfig.ErrorCountHolder
+import com.seanshubin.inversion.guard.runtime.ErrorCountHolder
 import com.seanshubin.inversion.guard.command.Command
 import com.seanshubin.inversion.guard.command.CreateJsonFileCommand
 import java.nio.file.Path
