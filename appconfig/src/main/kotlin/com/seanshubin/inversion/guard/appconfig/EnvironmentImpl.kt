@@ -1,4 +1,4 @@
-package com.seanshubin.inversion.guard.command
+package com.seanshubin.inversion.guard.appconfig
 
 import com.seanshubin.inversion.guard.jvmspec.contract.FilesContract
 

@@ -15,6 +15,11 @@
         </dependency>
         <dependency>
             <groupId>com.seanshubin.inversion.guard</groupId>
+            <artifactId>inversion-guard-appconfig</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.seanshubin.inversion.guard</groupId>
             <artifactId>inversion-guard-jvmspec-infrastructure</artifactId>
             <version>${project.version}</version>
         </dependency>

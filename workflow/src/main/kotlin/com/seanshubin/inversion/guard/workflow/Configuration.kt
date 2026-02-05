@@ -25,5 +25,6 @@ data class Configuration(
     val localCore: List<String>,
     val localBoundary: List<String>,
     val failOnUnknown: Boolean,
-    val categoryRuleSet: Map<String, CategoryRule>
+    val categoryRuleSet: Map<String, CategoryRule>,
+    val maximumAllowedErrorCount: Int
 )

@@ -2,19 +2,18 @@ package com.seanshubin.inversion.guard.reporting
 
 import com.seanshubin.inversion.guard.analysis.ClassAnalysis
 import com.seanshubin.inversion.guard.analysis.InvocationType
-import com.seanshubin.inversion.guard.analysis.MethodAnalysis
+import com.seanshubin.inversion.guard.appconfig.ErrorCountHolder
 import com.seanshubin.inversion.guard.command.Command
-import com.seanshubin.inversion.guard.command.CreateTextFileCommand
 import com.seanshubin.inversion.guard.command.CreateJsonFileCommand
-import com.seanshubin.inversion.guard.command.CreateFileCommand
-
 import java.nio.file.Path
 
 class QualityMetricsSummarizerImpl(
-    private val outputDir: Path
+    private val outputDir: Path,
+    private val errorCountHolder: ErrorCountHolder
 ) : QualityMetricsSummarizer {
     override fun summarize(analysisList: List<ClassAnalysis>): List<Command> {
         val count = countBoundaryInvocationsInNonBoundaryMethods(analysisList)
+        errorCountHolder.errorCount = count
         val metrics = QualityMetrics(
             staticInvocationsThatShouldBeInverted = count
         )

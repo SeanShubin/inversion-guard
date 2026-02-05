@@ -1,6 +1,11 @@
 package com.seanshubin.inversion.guard.launcher
 
 import com.seanshubin.inversion.guard.analysis.*
+import com.seanshubin.inversion.guard.appconfig.ApplicationRunner
+import com.seanshubin.inversion.guard.appconfig.Environment
+import com.seanshubin.inversion.guard.appconfig.EnvironmentImpl
+import com.seanshubin.inversion.guard.appconfig.ErrorCountHolder
+import com.seanshubin.inversion.guard.appconfig.ErrorCountHolderImpl
 import com.seanshubin.inversion.guard.workflow.*
 import com.seanshubin.inversion.guard.command.*
 import com.seanshubin.inversion.guard.fileselection.*
@@ -46,6 +51,8 @@ class ApplicationDependencies(
     private val localBoundary: List<String> = configuration.localBoundary
     private val failOnUnknown: Boolean = configuration.failOnUnknown
     private val categoryRuleSet: Map<String, CategoryRule> = configuration.categoryRuleSet
+    private val maximumAllowedErrorCount: Int = configuration.maximumAllowedErrorCount
+    private val errorCountHolder: ErrorCountHolder = ErrorCountHolderImpl()
     private val notifications: Notifications = LineEmittingNotifications(emit)
     private val stats: Stats = StatsImpl()
     private val attributeFactory: JvmAttributeFactory = JvmAttributeFactoryImpl()
@@ -129,7 +136,8 @@ class ApplicationDependencies(
     )
 
     private val qualityMetricsSummarizer: QualityMetricsSummarizer = QualityMetricsSummarizerImpl(
-        outputDir
+        outputDir,
+        errorCountHolder
     )
 
     private val qualityMetricsDetailReportGenerator: QualityMetricsDetailReportGenerator =
@@ -169,8 +177,13 @@ class ApplicationDependencies(
     )
 
     companion object {
-        fun fromConfiguration(integrations: Integrations, configuration: Configuration): Runnable {
-            return ApplicationDependencies(integrations, configuration).runner
+        fun fromConfiguration(integrations: Integrations, configuration: Configuration): ApplicationRunner {
+            val dependencies = ApplicationDependencies(integrations, configuration)
+            return ApplicationRunner(
+                dependencies.runner,
+                dependencies.errorCountHolder,
+                dependencies.maximumAllowedErrorCount
+            )
         }
     }
 }

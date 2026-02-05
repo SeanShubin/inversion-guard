@@ -1,16 +1,6 @@
 package com.seanshubin.inversion.guard.workflow
 
-import com.seanshubin.inversion.guard.analysis.ClassAnalysis
-import com.seanshubin.inversion.guard.analysis.ClassAnalyzer
-import com.seanshubin.inversion.guard.command.Command
-import com.seanshubin.inversion.guard.command.CommandRunner
-import com.seanshubin.inversion.guard.command.CreateFileCommand
-import com.seanshubin.inversion.guard.fileselection.FileSelector
-import com.seanshubin.inversion.guard.reporting.QualityMetricsSummarizer
-import com.seanshubin.inversion.guard.reporting.QualityMetricsDetailSummarizer
-import com.seanshubin.inversion.guard.reporting.HtmlReportSummarizer
-import com.seanshubin.inversion.guard.reporting.HtmlStatsSummarizer
-
+import com.seanshubin.inversion.guard.appconfig.ApplicationRunner
 import com.seanshubin.inversion.guard.jvmspec.configuration.FixedPathJsonFileKeyValueStoreFactory
 import com.seanshubin.inversion.guard.jvmspec.infrastructure.types.TypeSafety.toTypedList
 import com.seanshubin.inversion.guard.jvmspec.rules.RuleLoader
@@ -19,12 +9,12 @@ import java.nio.file.Path
 
 class ConfiguredRunnerFactory(
     private val args: Array<String>,
-    private val createRunner: (Integrations, Configuration) -> Runnable,
+    private val createRunner: (Integrations, Configuration) -> ApplicationRunner,
     private val keyValueStoreFactory: FixedPathJsonFileKeyValueStoreFactory,
     private val ruleLoader: RuleLoader,
     private val integrations: Integrations,
 ) {
-    fun createConfiguredRunner(): Runnable {
+    fun createConfiguredRunner(): ApplicationRunner {
         val configPathName = args.getOrNull(0) ?: "inversion-guard-config.json"
         val configPath = Path.of(configPathName)
         val keyValueStore = keyValueStoreFactory.create(configPath)
@@ -49,15 +39,16 @@ class ConfiguredRunnerFactory(
             keyValueStore.loadOrCreateDefault(listOf("localRules", "boundary"), emptyList<String>())
                 .toTypedList<String>()
         val failOnUnknown = keyValueStore.loadOrCreateDefault(listOf("failOnUnknown"), false) as Boolean
+        val maximumAllowedErrorCount = keyValueStore.loadOrCreateDefault(listOf("maximumAllowedErrorCount"), 0) as Int
         val baseDir = Path.of(baseDirName)
         val outputDir = Path.of(outputDirName)
         val rulesFile = Path.of(rulesFileName)
         if (!integrations.files.exists(rulesFile)) {
             throw RuntimeException(
                 "Global rules file not found: ${rulesFile.toAbsolutePath()}\n" +
-                "  This file is required for inversion guard analysis.\n" +
-                "  Configured via: 'globalRules' key in config (current value: '$rulesFileName')\n" +
-                "  To fix: Create the rules file at the specified location, or update the 'globalRules' config to point to an existing file."
+                        "  This file is required for inversion guard analysis.\n" +
+                        "  Configured via: 'globalRules' key in config (current value: '$rulesFileName')\n" +
+                        "  To fix: Create the rules file at the specified location, or update the 'globalRules' config to point to an existing file."
             )
         }
         val rulesJson = integrations.files.readString(rulesFile)
@@ -78,7 +69,8 @@ class ConfiguredRunnerFactory(
             localCore,
             localBoundary,
             failOnUnknown,
-            categories
+            categories,
+            maximumAllowedErrorCount
         )
         return createRunner(integrations, configuration)
     }

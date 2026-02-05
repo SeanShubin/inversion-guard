@@ -1,5 +1,7 @@
 package com.seanshubin.inversion.guard.command
 
+import com.seanshubin.inversion.guard.appconfig.Environment
+
 class CommandRunnerImpl(
     private val environment: Environment,
     private val runCommandEvent: (Command) -> Unit
