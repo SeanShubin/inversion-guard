@@ -120,20 +120,22 @@
       "workflow"
     ]
   },
-  "sourceDependencies": {
-    "sourceProjectPath": "../jvmspec",
-    "moduleMapping": {
-      "contract": "jvmspec-contract",
-      "analysis": "jvmspec-analysis",
-      "infrastructure": "jvmspec-infrastructure",
-      "classfile": "jvmspec-classfile",
-      "model": "jvmspec-model",
-      "output": "jvmspec-output",
-      "runtime": "jvmspec-runtime",
-      "rules": "jvmspec-rules",
-      "configuration": "jvmspec-configuration"
+  "sourceDependencies": [
+    {
+      "sourceProjectPath": "../jvmspec",
+      "moduleMapping": {
+        "contract": "jvmspec-contract",
+        "analysis": "jvmspec-analysis",
+        "infrastructure": "jvmspec-infrastructure",
+        "classfile": "jvmspec-classfile",
+        "model": "jvmspec-model",
+        "output": "jvmspec-output",
+        "runtime": "jvmspec-runtime",
+        "rules": "jvmspec-rules",
+        "configuration": "jvmspec-configuration"
+      }
     }
-  },
+  ],
   "javaVersion": "25",
   "entryPoints": {
     "composition": "com.seanshubin.inversion.guard.composition.InversionGuardApp"
