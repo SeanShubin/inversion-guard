@@ -1,7 +1,7 @@
 package com.seanshubin.inversion.guard.jvmspec.runtime.storage
 
 import com.fasterxml.jackson.module.kotlin.readValue
-import com.seanshubin.inversion.guard.jvmspec.contract.FilesContract
+import com.seanshubin.inversion.guard.di.contract.FilesContract
 import com.seanshubin.inversion.guard.jvmspec.infrastructure.serialization.JsonMappers
 import java.nio.charset.StandardCharsets
 import java.nio.file.Path

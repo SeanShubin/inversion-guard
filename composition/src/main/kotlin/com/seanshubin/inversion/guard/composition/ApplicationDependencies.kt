@@ -13,7 +13,7 @@ import com.seanshubin.inversion.guard.jvmspec.analysis.filtering.Filter
 import com.seanshubin.inversion.guard.jvmspec.analysis.filtering.RegexFilter
 import com.seanshubin.inversion.guard.jvmspec.analysis.statistics.Stats
 import com.seanshubin.inversion.guard.jvmspec.analysis.statistics.StatsImpl
-import com.seanshubin.inversion.guard.jvmspec.contract.FilesContract
+import com.seanshubin.inversion.guard.di.contract.FilesContract
 import com.seanshubin.inversion.guard.jvmspec.infrastructure.time.Timer
 import com.seanshubin.inversion.guard.jvmspec.model.api.JvmAttributeFactory
 import com.seanshubin.inversion.guard.jvmspec.model.api.JvmClassFactory

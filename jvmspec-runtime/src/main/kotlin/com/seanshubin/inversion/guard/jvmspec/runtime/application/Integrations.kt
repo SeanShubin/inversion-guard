@@ -1,6 +1,6 @@
 package com.seanshubin.inversion.guard.jvmspec.runtime.application
 
-import com.seanshubin.inversion.guard.jvmspec.contract.FilesContract
+import com.seanshubin.inversion.guard.di.contract.FilesContract
 import java.time.Clock
 
 //

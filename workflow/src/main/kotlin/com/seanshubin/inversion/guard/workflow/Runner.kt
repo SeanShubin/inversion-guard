@@ -12,7 +12,7 @@ import com.seanshubin.inversion.guard.reporting.HtmlReportSummarizer
 import com.seanshubin.inversion.guard.reporting.HtmlStatsSummarizer
 
 import com.seanshubin.inversion.guard.jvmspec.analysis.statistics.Stats
-import com.seanshubin.inversion.guard.jvmspec.contract.FilesContract
+import com.seanshubin.inversion.guard.di.contract.FilesContract
 import com.seanshubin.inversion.guard.jvmspec.infrastructure.time.Timer
 import com.seanshubin.inversion.guard.jvmspec.model.conversion.Converter
 

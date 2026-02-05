@@ -1,6 +1,11 @@
 {
+  "_documentation" : {
+    "description" : "Analyzes dependencies between classes to detect architectural violations",
+    "readme" : "https://github.com/SeanShubin/inversion-guard/blob/master/README.md",
+    "configHelp" : "inversion-guard-documentation.json"
+  },
   "inputDir" : ".",
-  "outputDir" : "generated/inversion-guard-report",
+  "outputDir" : "generated/inversion-guard",
   "classes" : {
     "includeFile" : [ ".*/target/.*\\.class" ],
     "excludeFile" : [ ],
@@ -11,5 +16,6 @@
     "core" : [ ],
     "boundary" : [ ]
   },
-  "failOnUnknown" : false
+  "failOnUnknown" : false,
+  "maximumAllowedErrorCount" : 0
 }

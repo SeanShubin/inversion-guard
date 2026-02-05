@@ -41,35 +41,35 @@
     }
   },
   "modules": {
-    "jvmspec-contract": [],
     "jvmspec-analysis": [
-      "jvmspec-contract"
+      "di-contract"
     ],
     "jvmspec-infrastructure": [
-      "jvmspec-contract",
+      "di-contract",
       "jackson",
       "jackson-time"
     ],
     "jvmspec-classfile": [
       "jvmspec-infrastructure",
-      "jvmspec-contract"
+      "di-contract"
     ],
     "jvmspec-model": [
       "jvmspec-classfile",
-      "jvmspec-contract"
+      "di-contract"
     ],
     "jvmspec-output": [
       "jvmspec-classfile",
       "jvmspec-infrastructure",
       "jvmspec-model",
-      "jvmspec-contract"
+      "di-contract"
     ],
     "jvmspec-runtime": [
       "jvmspec-analysis",
       "jvmspec-infrastructure",
       "jvmspec-model",
       "jvmspec-output",
-      "jvmspec-contract",
+      "di-contract",
+      "di-delegate",
       "jackson",
       "jackson-time"
     ],
@@ -77,18 +77,13 @@
       "jackson",
       "jackson-time"
     ],
-    "jvmspec-configuration": [
-      "jvmspec-contract",
-      "jackson",
-      "jackson-time"
-    ],
     "file-selection": [
-      "jvmspec-contract",
+      "di-contract",
       "jvmspec-analysis"
     ],
     "analysis": [
       "jvmspec-model",
-      "jvmspec-contract",
+      "di-contract",
       "jvmspec-analysis",
       "jvmspec-classfile",
       "jvmspec-rules"
@@ -101,7 +96,7 @@
       "jvmspec-output"
     ],
     "runtime": [
-      "jvmspec-contract"
+      "di-contract"
     ],
     "command": [
       "runtime",
@@ -113,31 +108,51 @@
       "reporting",
       "command",
       "runtime",
-      "jvmspec-configuration",
+      "dynamic-core",
+      "dynamic-json",
       "jvmspec-runtime"
     ],
     "composition": [
       "workflow"
+    ],
+    "dynamic-core": [],
+    "dynamic-json": [
+      "dynamic-core",
+      "di-delegate",
+      "jackson",
+      "jackson-time"
+    ],
+    "di-contract": [],
+    "di-delegate": [
+      "di-contract"
     ]
   },
   "sourceDependencies": [
     {
       "sourceProjectPath": "../jvmspec",
       "moduleMapping": {
-        "contract": "jvmspec-contract",
         "analysis": "jvmspec-analysis",
         "infrastructure": "jvmspec-infrastructure",
         "classfile": "jvmspec-classfile",
         "model": "jvmspec-model",
         "output": "jvmspec-output",
         "runtime": "jvmspec-runtime",
-        "rules": "jvmspec-rules",
-        "configuration": "jvmspec-configuration"
+        "rules": "jvmspec-rules"
+      }
+    },
+    {
+      "sourceProjectPath": "../kotlin-reusable",
+      "moduleMapping": {
+        "dynamic-core": "dynamic-core",
+        "dynamic-json": "dynamic-json",
+        "di-contract": "di-contract",
+        "di-delegate": "di-delegate"
       }
     }
   ],
   "javaVersion": "25",
   "entryPoints": {
     "composition": "com.seanshubin.inversion.guard.composition.InversionGuardApp"
-  }
+  },
+  "exports": []
 }

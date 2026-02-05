@@ -41,7 +41,6 @@
         </dependencies>
     </dependencyManagement>
     <modules>
-        <module>jvmspec-contract</module>
         <module>jvmspec-analysis</module>
         <module>jvmspec-infrastructure</module>
         <module>jvmspec-classfile</module>
@@ -49,7 +48,6 @@
         <module>jvmspec-output</module>
         <module>jvmspec-runtime</module>
         <module>jvmspec-rules</module>
-        <module>jvmspec-configuration</module>
         <module>file-selection</module>
         <module>analysis</module>
         <module>reporting</module>
@@ -57,6 +55,10 @@
         <module>command</module>
         <module>workflow</module>
         <module>composition</module>
+        <module>dynamic-core</module>
+        <module>dynamic-json</module>
+        <module>di-contract</module>
+        <module>di-delegate</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

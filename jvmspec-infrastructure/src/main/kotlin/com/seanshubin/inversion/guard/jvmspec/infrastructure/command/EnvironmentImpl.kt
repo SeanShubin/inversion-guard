@@ -1,6 +1,6 @@
 package com.seanshubin.inversion.guard.jvmspec.infrastructure.command
 
-import com.seanshubin.inversion.guard.jvmspec.contract.FilesContract
+import com.seanshubin.inversion.guard.di.contract.FilesContract
 
 //
 // This file was imported from: ../jvmspec

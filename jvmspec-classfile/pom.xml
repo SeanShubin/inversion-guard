@@ -10,7 +10,7 @@
         </dependency>
         <dependency>
             <groupId>com.seanshubin.inversion.guard</groupId>
-            <artifactId>inversion-guard-jvmspec-contract</artifactId>
+            <artifactId>inversion-guard-di-contract</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>

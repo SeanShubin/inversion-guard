@@ -1,7 +1,5 @@
 package com.seanshubin.inversion.guard.composition
 
-import com.seanshubin.inversion.guard.jvmspec.configuration.FixedPathJsonFileKeyValueStoreFactory
-import com.seanshubin.inversion.guard.jvmspec.configuration.FixedPathJsonFileKeyValueStoreFactoryImpl
 import com.seanshubin.inversion.guard.runtime.ErrorCountHolder
 import com.seanshubin.inversion.guard.workflow.ConfiguredRunnerFactory
 import com.seanshubin.inversion.guard.jvmspec.rules.JsonRuleLoader
@@ -12,13 +10,10 @@ class BootstrapDependencies(
     private val args: Array<String>,
     private val integrations: Integrations
 ) {
-    private val keyValueStoreFactory: FixedPathJsonFileKeyValueStoreFactory =
-        FixedPathJsonFileKeyValueStoreFactoryImpl(integrations.files)
     private val ruleLoader: RuleLoader = JsonRuleLoader()
     private val configuredRunnerFactory: ConfiguredRunnerFactory<ApplicationDependencies> = ConfiguredRunnerFactory(
         args,
         ApplicationDependencies::fromConfiguration,
-        keyValueStoreFactory,
         ruleLoader,
         integrations
     )

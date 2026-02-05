@@ -1,6 +1,6 @@
 package com.seanshubin.inversion.guard.jvmspec.configuration
 
-import com.seanshubin.inversion.guard.jvmspec.contract.FilesContract
+import com.seanshubin.jvmspec.contract.FilesContract
 import java.nio.file.Path
 
 //

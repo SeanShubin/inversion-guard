@@ -30,7 +30,12 @@
         </dependency>
         <dependency>
             <groupId>com.seanshubin.inversion.guard</groupId>
-            <artifactId>inversion-guard-jvmspec-configuration</artifactId>
+            <artifactId>inversion-guard-dynamic-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.seanshubin.inversion.guard</groupId>
+            <artifactId>inversion-guard-dynamic-json</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
