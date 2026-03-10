@@ -28,7 +28,6 @@ import com.seanshubin.inversion.guard.jvmspec.output.formatting.JvmSpecFormat
 import com.seanshubin.inversion.guard.jvmspec.output.formatting.JvmSpecFormatDetailed
 import com.seanshubin.inversion.guard.jvmspec.rules.CategoryRule
 import com.seanshubin.inversion.guard.jvmspec.rules.RuleInterpreter
-import com.seanshubin.inversion.guard.jvmspec.runtime.application.Integrations
 import java.nio.file.Path
 import java.time.Clock
 

@@ -1,17 +1,17 @@
 package com.seanshubin.inversion.guard.workflow
 
+import com.seanshubin.inversion.guard.di.contract.FilesContract
 import com.seanshubin.inversion.guard.dynamic.core.KeyValueStore
 import com.seanshubin.inversion.guard.dynamic.core.KeyValueStoreWithDocumentation
 import com.seanshubin.inversion.guard.dynamic.core.KeyValueStoreWithDocumentationDelegate
 import com.seanshubin.inversion.guard.dynamic.json.JsonFileKeyValueStore
 import com.seanshubin.inversion.guard.jvmspec.infrastructure.types.TypeSafety.toTypedList
 import com.seanshubin.inversion.guard.jvmspec.rules.RuleLoader
-import com.seanshubin.inversion.guard.jvmspec.runtime.application.Integrations
 import java.nio.file.Path
 import java.nio.file.Paths
 
 class ConfigurationLoader(
-    private val integrations: Integrations,
+    private val files: FilesContract,
     private val configPath: Path,
     private val ruleLoader: RuleLoader
 ) {
@@ -19,8 +19,8 @@ class ConfigurationLoader(
         val configBaseName = configPath.toString().removeSuffix("-config.json").removeSuffix(".json")
         val configDocumentationFile = Paths.get("$configBaseName-documentation.json")
 
-        val keyValueStore: KeyValueStore = JsonFileKeyValueStore(integrations.files, configPath)
-        val documentationKeyValueStore: KeyValueStore = JsonFileKeyValueStore(integrations.files, configDocumentationFile)
+        val keyValueStore: KeyValueStore = JsonFileKeyValueStore(files, configPath)
+        val documentationKeyValueStore: KeyValueStore = JsonFileKeyValueStore(files, configDocumentationFile)
         val config: KeyValueStoreWithDocumentation =
             KeyValueStoreWithDocumentationDelegate(keyValueStore, documentationKeyValueStore)
 
@@ -92,7 +92,7 @@ class ConfigurationLoader(
         val outputDir = Path.of(outputDirName)
         val rulesFile = Path.of(rulesFileName)
 
-        if (!integrations.files.exists(rulesFile)) {
+        if (!files.exists(rulesFile)) {
             throw RuntimeException(
                 "Global rules file not found: ${rulesFile.toAbsolutePath()}\n" +
                         "  This file is required for inversion guard analysis.\n" +
@@ -101,7 +101,7 @@ class ConfigurationLoader(
             )
         }
 
-        val rulesJson = integrations.files.readString(rulesFile)
+        val rulesJson = files.readString(rulesFile)
         val rulesData = ruleLoader.load(rulesJson)
         val categories = rulesData.categories
         val globalCore = rulesData.core

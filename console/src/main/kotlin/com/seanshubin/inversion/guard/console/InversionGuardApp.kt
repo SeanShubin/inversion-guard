@@ -1,8 +1,7 @@
 package com.seanshubin.inversion.guard.console
 
 import com.seanshubin.inversion.guard.composition.BootstrapDependencies
-import com.seanshubin.inversion.guard.jvmspec.runtime.application.Integrations
-import com.seanshubin.inversion.guard.jvmspec.runtime.application.ProductionIntegrations
+import com.seanshubin.inversion.guard.composition.Integrations
 import kotlin.system.exitProcess
 
 object InversionGuardApp {
