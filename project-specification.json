@@ -115,6 +115,9 @@
     "composition": [
       "workflow"
     ],
+    "console": [
+      "composition"
+    ],
     "dynamic-core": [],
     "dynamic-json": [
       "dynamic-core",
@@ -152,7 +155,7 @@
   ],
   "javaVersion": "25",
   "entryPoints": {
-    "composition": "com.seanshubin.inversion.guard.composition.InversionGuardApp"
+    "console": "com.seanshubin.inversion.guard.console.InversionGuardApp"
   },
   "exports": []
 }

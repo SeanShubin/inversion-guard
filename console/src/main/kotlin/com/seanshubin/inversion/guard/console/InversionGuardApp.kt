@@ -1,5 +1,6 @@
-package com.seanshubin.inversion.guard.composition
+package com.seanshubin.inversion.guard.console
 
+import com.seanshubin.inversion.guard.composition.BootstrapDependencies
 import com.seanshubin.inversion.guard.jvmspec.runtime.application.Integrations
 import com.seanshubin.inversion.guard.jvmspec.runtime.application.ProductionIntegrations
 import kotlin.system.exitProcess
@@ -8,9 +9,13 @@ object InversionGuardApp {
     @JvmStatic
     fun main(args: Array<String>) {
         val integrations: Integrations = ProductionIntegrations
+        val exitCode = runApplication(args, integrations)
+        exitProcess(exitCode)
+    }
+
+    fun runApplication(args: Array<String>, integrations: Integrations): Int {
         val bootstrapDependencies = BootstrapDependencies(args, integrations)
         bootstrapDependencies.runner.run()
-        val exitCode = if (bootstrapDependencies.errorCountHolder.errorCount > bootstrapDependencies.maximumAllowedErrorCount) 1 else 0
-        exitProcess(exitCode)
+        return if (bootstrapDependencies.errorCountHolder.errorCount > bootstrapDependencies.maximumAllowedErrorCount) 1 else 0
     }
 }

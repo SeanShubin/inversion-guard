@@ -55,6 +55,7 @@
         <module>command</module>
         <module>workflow</module>
         <module>composition</module>
+        <module>console</module>
         <module>dynamic-core</module>
         <module>dynamic-json</module>
         <module>di-contract</module>
