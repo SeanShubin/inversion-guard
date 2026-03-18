@@ -40,7 +40,6 @@ class ApplicationDependencies(
     private val integrations: Integrations,
     private val configuration: Configuration
 ) {
-    private val setExitCode: (Int) -> Unit = integrations.setExitCode
     private val files: FilesContract = integrations.files
     private val clock: Clock = integrations.clock
     private val emit: (Any?) -> Unit = integrations.emit
@@ -164,7 +163,7 @@ class ApplicationDependencies(
     )
 
     private val timer: Timer = Timer(clock)
-    val runner: Runnable = Runner(
+    val runner: Runner = RunnerImpl(
         files,
         fileSelector,
         classAnalyzer,
@@ -179,7 +178,6 @@ class ApplicationDependencies(
         notifications::timeTakenMillis,
         converter,
         errorCountHolder,
-        setExitCode,
         maximumAllowedErrorCount
     )
 }
