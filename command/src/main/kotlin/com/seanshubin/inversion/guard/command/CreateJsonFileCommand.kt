@@ -1,7 +1,7 @@
 package com.seanshubin.inversion.guard.command
 
-import com.seanshubin.inversion.guard.runtime.Environment
 import com.seanshubin.inversion.guard.jvmspec.infrastructure.serialization.JsonMappers.toJson
+import com.seanshubin.inversion.guard.runtime.Environment
 import java.nio.file.Path
 
 data class CreateJsonFileCommand(

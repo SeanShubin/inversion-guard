@@ -1,23 +1,18 @@
 package com.seanshubin.inversion.guard.workflow
 
-import com.seanshubin.inversion.guard.analysis.ClassAnalysis
 import com.seanshubin.inversion.guard.analysis.ClassAnalysisSummary
 import com.seanshubin.inversion.guard.analysis.ClassAnalyzer
-import com.seanshubin.inversion.guard.command.Command
 import com.seanshubin.inversion.guard.command.CommandRunner
-import com.seanshubin.inversion.guard.command.CreateFileCommand
-import com.seanshubin.inversion.guard.fileselection.FileSelector
-import com.seanshubin.inversion.guard.reporting.QualityMetricsSummarizer
-import com.seanshubin.inversion.guard.reporting.QualityMetricsDetailSummarizer
-import com.seanshubin.inversion.guard.reporting.HtmlReportSummarizer
-import com.seanshubin.inversion.guard.reporting.HtmlStatsSummarizer
-
-import com.seanshubin.inversion.guard.jvmspec.analysis.statistics.Stats
 import com.seanshubin.inversion.guard.di.contract.FilesContract
+import com.seanshubin.inversion.guard.fileselection.FileSelector
+import com.seanshubin.inversion.guard.jvmspec.analysis.statistics.Stats
 import com.seanshubin.inversion.guard.jvmspec.infrastructure.time.Timer
 import com.seanshubin.inversion.guard.jvmspec.model.conversion.Converter
+import com.seanshubin.inversion.guard.reporting.HtmlReportSummarizer
+import com.seanshubin.inversion.guard.reporting.HtmlStatsSummarizer
+import com.seanshubin.inversion.guard.reporting.QualityMetricsDetailSummarizer
+import com.seanshubin.inversion.guard.reporting.QualityMetricsSummarizer
 import com.seanshubin.inversion.guard.runtime.ErrorCountHolder
-import com.seanshubin.inversion.guard.workflow.ConfigDocumentation.maximumAllowedErrorCount
 
 class Runner(
     private val files: FilesContract,
@@ -59,7 +54,7 @@ class Runner(
                     // Convert to lightweight summary and discard heavy JvmClass reference
                     val summary = ClassAnalysisSummary.fromClassAnalysis(analysis)
                     analysisList.add(summary)
-                } catch(ex:Exception) {
+                } catch (ex: Exception) {
                     throw RuntimeException("Error processing file ${file.toAbsolutePath()}", ex)
                 }
             }

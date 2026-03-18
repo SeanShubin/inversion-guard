@@ -1,8 +1,7 @@
 package com.seanshubin.inversion.guard.jvmspec.runtime.application
 
-import com.seanshubin.inversion.guard.jvmspec.classfile.structure.ClassFile
 import com.seanshubin.inversion.guard.di.contract.FilesContract
-import com.seanshubin.inversion.guard.jvmspec.model.api.JvmClass
+import com.seanshubin.inversion.guard.jvmspec.classfile.structure.ClassFile
 import com.seanshubin.inversion.guard.jvmspec.model.api.JvmClassFactory
 import com.seanshubin.inversion.guard.jvmspec.output.formatting.JvmSpecFormat
 import java.io.DataInputStream

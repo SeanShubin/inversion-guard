@@ -2,11 +2,8 @@ package com.seanshubin.inversion.guard.reporting
 
 import com.seanshubin.inversion.guard.analysis.ClassAnalysisSummary
 import com.seanshubin.inversion.guard.analysis.InvocationAnalysis
-import com.seanshubin.inversion.guard.analysis.InvocationType
 import com.seanshubin.inversion.guard.analysis.MethodAnalysis
 import com.seanshubin.inversion.guard.command.Command
-import com.seanshubin.inversion.guard.command.CreateTextFileCommand
-import com.seanshubin.inversion.guard.command.CreateJsonFileCommand
 import com.seanshubin.inversion.guard.command.CreateFileCommand
 import com.seanshubin.inversion.guard.jvmspec.infrastructure.collections.Tree
 import java.nio.file.Path

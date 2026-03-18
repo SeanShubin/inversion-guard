@@ -1,9 +1,8 @@
 package com.seanshubin.inversion.guard.composition
 
-import com.seanshubin.inversion.guard.workflow.ConfigurationLoader
 import com.seanshubin.inversion.guard.jvmspec.rules.JsonRuleLoader
 import com.seanshubin.inversion.guard.jvmspec.rules.RuleLoader
-import java.nio.file.Path
+import com.seanshubin.inversion.guard.workflow.ConfigurationLoader
 
 class BootstrapDependencies(
     private val integrations: Integrations

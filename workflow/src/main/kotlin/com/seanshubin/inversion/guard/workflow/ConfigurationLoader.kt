@@ -11,7 +11,7 @@ import java.nio.file.Path
 import java.nio.file.Paths
 
 class ConfigurationLoader(
-    private val args:Array<String>,
+    private val args: Array<String>,
     private val files: FilesContract,
     private val ruleLoader: RuleLoader
 ) {

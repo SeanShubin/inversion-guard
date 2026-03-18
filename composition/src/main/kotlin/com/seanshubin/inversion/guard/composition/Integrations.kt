@@ -11,6 +11,6 @@ interface Integrations {
     val emit: (Any?) -> Unit
     val systemErr: PrintStream
     val systemOut: PrintStream
-    val setExitCode:(Int)->Unit
-    val getExitCode:() -> Int
+    val setExitCode: (Int) -> Unit
+    val getExitCode: () -> Int
 }

@@ -2,9 +2,9 @@ package com.seanshubin.inversion.guard.reporting
 
 import com.seanshubin.inversion.guard.analysis.ClassAnalysisSummary
 import com.seanshubin.inversion.guard.analysis.InvocationType
-import com.seanshubin.inversion.guard.runtime.ErrorCountHolder
 import com.seanshubin.inversion.guard.command.Command
 import com.seanshubin.inversion.guard.command.CreateJsonFileCommand
+import com.seanshubin.inversion.guard.runtime.ErrorCountHolder
 import java.nio.file.Path
 
 class QualityMetricsSummarizerImpl(

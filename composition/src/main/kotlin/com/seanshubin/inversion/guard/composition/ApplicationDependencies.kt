@@ -1,19 +1,18 @@
 package com.seanshubin.inversion.guard.composition
 
-import com.seanshubin.inversion.guard.analysis.*
-import com.seanshubin.inversion.guard.runtime.Environment
-import com.seanshubin.inversion.guard.runtime.EnvironmentImpl
-import com.seanshubin.inversion.guard.runtime.ErrorCountHolder
-import com.seanshubin.inversion.guard.runtime.ErrorCountHolderImpl
-import com.seanshubin.inversion.guard.workflow.*
-import com.seanshubin.inversion.guard.command.*
-import com.seanshubin.inversion.guard.fileselection.*
-import com.seanshubin.inversion.guard.reporting.*
+import com.seanshubin.inversion.guard.analysis.ClassAnalyzer
+import com.seanshubin.inversion.guard.analysis.ClassAnalyzerImpl
+import com.seanshubin.inversion.guard.command.CommandRunner
+import com.seanshubin.inversion.guard.command.CommandRunnerImpl
+import com.seanshubin.inversion.guard.di.contract.FilesContract
+import com.seanshubin.inversion.guard.fileselection.FileSelector
+import com.seanshubin.inversion.guard.fileselection.FileSelectorFileVisitorFactory
+import com.seanshubin.inversion.guard.fileselection.FileSelectorFileVisitorFactoryImpl
+import com.seanshubin.inversion.guard.fileselection.FileSelectorImpl
 import com.seanshubin.inversion.guard.jvmspec.analysis.filtering.Filter
 import com.seanshubin.inversion.guard.jvmspec.analysis.filtering.RegexFilter
 import com.seanshubin.inversion.guard.jvmspec.analysis.statistics.Stats
 import com.seanshubin.inversion.guard.jvmspec.analysis.statistics.StatsImpl
-import com.seanshubin.inversion.guard.di.contract.FilesContract
 import com.seanshubin.inversion.guard.jvmspec.infrastructure.time.Timer
 import com.seanshubin.inversion.guard.jvmspec.model.api.JvmAttributeFactory
 import com.seanshubin.inversion.guard.jvmspec.model.api.JvmClassFactory
@@ -28,6 +27,12 @@ import com.seanshubin.inversion.guard.jvmspec.output.formatting.JvmSpecFormat
 import com.seanshubin.inversion.guard.jvmspec.output.formatting.JvmSpecFormatDetailed
 import com.seanshubin.inversion.guard.jvmspec.rules.CategoryRule
 import com.seanshubin.inversion.guard.jvmspec.rules.RuleInterpreter
+import com.seanshubin.inversion.guard.reporting.*
+import com.seanshubin.inversion.guard.runtime.Environment
+import com.seanshubin.inversion.guard.runtime.EnvironmentImpl
+import com.seanshubin.inversion.guard.runtime.ErrorCountHolder
+import com.seanshubin.inversion.guard.runtime.ErrorCountHolderImpl
+import com.seanshubin.inversion.guard.workflow.*
 import java.nio.file.Path
 import java.time.Clock
 

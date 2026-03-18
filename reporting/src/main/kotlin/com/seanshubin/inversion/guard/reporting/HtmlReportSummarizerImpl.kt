@@ -5,11 +5,11 @@ import com.seanshubin.inversion.guard.analysis.ClassAnalysisSummary
 import com.seanshubin.inversion.guard.command.Command
 import com.seanshubin.inversion.guard.command.CreateTextFileCommand
 import com.seanshubin.inversion.guard.jvmspec.infrastructure.collections.Tree
+import com.seanshubin.inversion.guard.jvmspec.model.api.JvmClass
+import com.seanshubin.inversion.guard.jvmspec.output.formatting.JvmSpecFormat
 import com.seanshubin.inversion.guard.reporting.HtmlElement.Companion.text
 import com.seanshubin.inversion.guard.reporting.HtmlElement.Tag
 import com.seanshubin.inversion.guard.reporting.HtmlElement.Text
-import com.seanshubin.inversion.guard.jvmspec.model.api.JvmClass
-import com.seanshubin.inversion.guard.jvmspec.output.formatting.JvmSpecFormat
 import java.nio.charset.StandardCharsets
 import java.nio.file.Path
 
@@ -30,10 +30,14 @@ class HtmlReportSummarizerImpl(
         }
 
         val indexHtml = generateIndexHtml(staticInvocationsThatShouldBeInverted, detailReport, classPathMap)
-        val indexCommand = CreateTextFileCommand(outputDir.resolve(ReportCategory.BROWSE.directory).resolve("index.html"), indexHtml)
+        val indexCommand =
+            CreateTextFileCommand(outputDir.resolve(ReportCategory.BROWSE.directory).resolve("index.html"), indexHtml)
 
         val disassemblyIndexHtml = generateDisassemblyIndexHtml(analysisList, classPathMap)
-        val disassemblyIndexCommand = CreateTextFileCommand(outputDir.resolve(ReportCategory.BROWSE.directory).resolve("disassembly.html"), disassemblyIndexHtml)
+        val disassemblyIndexCommand = CreateTextFileCommand(
+            outputDir.resolve(ReportCategory.BROWSE.directory).resolve("disassembly.html"),
+            disassemblyIndexHtml
+        )
 
         val cssCommand = loadResourceAsCommand("quality-metrics.css")
         val redirectCommand = loadResourceAsCommand("_index.html")

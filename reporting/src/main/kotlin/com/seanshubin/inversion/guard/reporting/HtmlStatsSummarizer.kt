@@ -1,13 +1,7 @@
 package com.seanshubin.inversion.guard.reporting
 
-import com.seanshubin.inversion.guard.analysis.ClassAnalysis
-import com.seanshubin.inversion.guard.analysis.InvocationType
-import com.seanshubin.inversion.guard.analysis.MethodAnalysis
 import com.seanshubin.inversion.guard.command.Command
 import com.seanshubin.inversion.guard.command.CreateTextFileCommand
-import com.seanshubin.inversion.guard.command.CreateJsonFileCommand
-import com.seanshubin.inversion.guard.command.CreateFileCommand
-
 import com.seanshubin.inversion.guard.jvmspec.analysis.filtering.MatchedFilterEvent
 import com.seanshubin.inversion.guard.jvmspec.analysis.filtering.UnmatchedFilterEvent
 import com.seanshubin.inversion.guard.jvmspec.analysis.statistics.Stats
@@ -84,7 +78,10 @@ class HtmlStatsSummarizerImpl(
         val htmlLines = html.toLines()
         val htmlContent = (listOf(doctype) + htmlLines).joinToString("\n")
 
-        return CreateTextFileCommand(outputDir.resolve(ReportCategory.BROWSE.directory).resolve("filters.html"), htmlContent)
+        return CreateTextFileCommand(
+            outputDir.resolve(ReportCategory.BROWSE.directory).resolve("filters.html"),
+            htmlContent
+        )
     }
 
     private fun createHead(title: String): HtmlElement {
@@ -251,7 +248,9 @@ class HtmlStatsSummarizerImpl(
         val htmlLines = html.toLines()
         val htmlContent = (listOf(doctype) + htmlLines).joinToString("\n")
 
-        return CreateTextFileCommand(outputDir.resolve(ReportCategory.BROWSE.directory).resolve("filters-$category.html"), htmlContent)
+        return CreateTextFileCommand(
+            outputDir.resolve(ReportCategory.BROWSE.directory).resolve("filters-$category.html"), htmlContent
+        )
     }
 
     private fun createSectionPage(
@@ -295,7 +294,10 @@ class HtmlStatsSummarizerImpl(
         val htmlLines = html.toLines()
         val htmlContent = (listOf(doctype) + htmlLines).joinToString("\n")
 
-        return CreateTextFileCommand(outputDir.resolve(ReportCategory.BROWSE.directory).resolve("filters-$category-$sectionName.html"), htmlContent)
+        return CreateTextFileCommand(
+            outputDir.resolve(ReportCategory.BROWSE.directory).resolve("filters-$category-$sectionName.html"),
+            htmlContent
+        )
     }
 
     private fun formatSectionName(sectionName: String): String {

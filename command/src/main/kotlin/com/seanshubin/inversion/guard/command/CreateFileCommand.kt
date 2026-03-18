@@ -1,7 +1,7 @@
 package com.seanshubin.inversion.guard.command
 
-import com.seanshubin.inversion.guard.runtime.Environment
 import com.seanshubin.inversion.guard.jvmspec.infrastructure.collections.Tree
+import com.seanshubin.inversion.guard.runtime.Environment
 import java.nio.file.Path
 
 data class CreateFileCommand(val path: Path, val roots: List<Tree>) : Command {
