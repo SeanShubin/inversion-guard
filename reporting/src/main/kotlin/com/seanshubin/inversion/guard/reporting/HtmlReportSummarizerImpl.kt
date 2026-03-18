@@ -288,7 +288,11 @@ class HtmlReportSummarizerImpl(
             Tag(
                 "tr",
                 text("th", "Level"),
-                text("th", "Name/Signature"),
+                Tag(
+                    "th",
+                    attributes = listOf("class" to "signature-column"),
+                    children = listOf(Text("Name/Signature"))
+                ),
                 text("th", "Problem Count"),
                 text("th", "Complexity"),
                 text("th", "Details")
@@ -310,7 +314,7 @@ class HtmlReportSummarizerImpl(
                 text("td", "Class"),
                 Tag(
                     "td",
-                    attributes = listOf("class" to "class-name"),
+                    attributes = listOf("class" to "class-name signature-column"),
                     children = listOf(
                         Tag(
                             "a",
@@ -344,7 +348,7 @@ class HtmlReportSummarizerImpl(
                 text("td", "Method"),
                 Tag(
                     "td",
-                    attributes = listOf("class" to "method-signature"),
+                    attributes = listOf("class" to "method-signature signature-column"),
                     children = listOf(Text(methodDetail.methodSignature))
                 ),
                 text("td", ""),
@@ -369,7 +373,7 @@ class HtmlReportSummarizerImpl(
                 text("td", "Invocation"),
                 Tag(
                     "td",
-                    attributes = listOf("class" to "invocation-signature"),
+                    attributes = listOf("class" to "invocation-signature signature-column"),
                     children = listOf(Text(invocationDetail.signature))
                 ),
                 text("td", ""),
