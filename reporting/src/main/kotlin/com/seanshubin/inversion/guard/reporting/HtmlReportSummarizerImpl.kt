@@ -164,7 +164,8 @@ class HtmlReportSummarizerImpl(
             "body",
             text("h1", "Quality Metrics Report"),
             createTableOfContents(),
-            createQualityMetricsSection(staticInvocationsThatShouldBeInverted, detailReport, classPathMap)
+            createQualityMetricsSection(staticInvocationsThatShouldBeInverted),
+            createStaticInvocationDetailSection(detailReport, classPathMap)
         )
     }
 
@@ -203,9 +204,7 @@ class HtmlReportSummarizerImpl(
     }
 
     private fun createQualityMetricsSection(
-        staticInvocationsThatShouldBeInverted: Int,
-        detailReport: QualityMetricsDetailReport,
-        classPathMap: Map<String, Path>
+        staticInvocationsThatShouldBeInverted: Int
     ): HtmlElement {
         val cssClass = if (staticInvocationsThatShouldBeInverted > 0) "has-problems" else "no-problems"
         return Tag(
@@ -213,7 +212,20 @@ class HtmlReportSummarizerImpl(
             attributes = listOf("id" to "quality-metrics"),
             children = listOf(
                 text("h2", "Quality Metrics"),
-                createSummaryTable(staticInvocationsThatShouldBeInverted, cssClass),
+                createSummaryTable(staticInvocationsThatShouldBeInverted, cssClass)
+            )
+        )
+    }
+
+    private fun createStaticInvocationDetailSection(
+        detailReport: QualityMetricsDetailReport,
+        classPathMap: Map<String, Path>
+    ): HtmlElement {
+        return Tag(
+            "section",
+            attributes = listOf("id" to "static-invocation-detail"),
+            children = listOf(
+                text("h2", "Static Invocation Detail"),
                 createDetailTable(detailReport, classPathMap)
             )
         )

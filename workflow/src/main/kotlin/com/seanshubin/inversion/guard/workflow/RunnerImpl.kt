@@ -35,13 +35,11 @@ class RunnerImpl(
         val durationMillis = timer.withTimerMilliseconds {
             val analysisList = mutableListOf<ClassAnalysisSummary>()
 
-            // Process and write each class immediately to allow garbage collection
             fileSelector.map { file ->
                 try {
                     val jvmClass = with(converter) { file.toJvmClass(files, file) }
                     val analysis = classAnalyzer.analyzeClass(jvmClass)
 
-                    // Immediately create and write this class's disassembly and HTML page
                     val classCommands = classProcessor.processClass(analysis)
                     classCommands.forEach { command ->
                         commandRunner.runCommand(command)
@@ -50,7 +48,6 @@ class RunnerImpl(
                     val htmlClassPageCommand = htmlReportSummarizer.generateClassPage(analysis)
                     commandRunner.runCommand(htmlClassPageCommand)
 
-                    // Convert to lightweight summary and discard heavy JvmClass reference
                     val summary = ClassAnalysisSummary.fromClassAnalysis(analysis)
                     analysisList.add(summary)
                 } catch (ex: Exception) {
