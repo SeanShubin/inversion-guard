@@ -1,6 +1,6 @@
 package com.seanshubin.inversion.guard.reporting
 
-import com.seanshubin.inversion.guard.analysis.ClassAnalysis
+import com.seanshubin.inversion.guard.analysis.ClassAnalysisSummary
 import com.seanshubin.inversion.guard.analysis.InvocationAnalysis
 import com.seanshubin.inversion.guard.analysis.InvocationType
 import com.seanshubin.inversion.guard.analysis.MethodAnalysis
@@ -14,12 +14,12 @@ import java.nio.file.Path
 class AnalysisSummarizerImpl(
     private val outputDir: Path,
 ) : AnalysisSummarizer {
-    override fun summarize(analysisList: List<ClassAnalysis>): List<Command> {
+    override fun summarize(analysisList: List<ClassAnalysisSummary>): List<Command> {
         val sorted = analysisList.sortedWith(
-            compareByDescending<ClassAnalysis>({
+            compareByDescending<ClassAnalysisSummary>({
                 it.countProblems()
             }).thenBy({
-                it.jvmClass.thisClassName
+                it.className
             })
         )
         val reportTrees = sorted.map(::classReport)
@@ -28,9 +28,9 @@ class AnalysisSummarizerImpl(
         return listOf(createFileCommand)
     }
 
-    private fun classReport(analysis: ClassAnalysis): Tree {
+    private fun classReport(analysis: ClassAnalysisSummary): Tree {
         val problemCount = analysis.countProblems()
-        val className = analysis.jvmClass.thisClassName
+        val className = analysis.className
         val classComplexity = analysis.complexity()
         val methodNodes = analysis.methodAnalysisList.map(::methodReport)
         val problemString = if (problemCount == 1) "problem" else "problems"

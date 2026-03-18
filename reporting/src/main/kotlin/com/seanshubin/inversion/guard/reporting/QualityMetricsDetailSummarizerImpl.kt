@@ -1,6 +1,6 @@
 package com.seanshubin.inversion.guard.reporting
 
-import com.seanshubin.inversion.guard.analysis.ClassAnalysis
+import com.seanshubin.inversion.guard.analysis.ClassAnalysisSummary
 import com.seanshubin.inversion.guard.analysis.InvocationType
 import com.seanshubin.inversion.guard.analysis.MethodAnalysis
 import com.seanshubin.inversion.guard.command.Command
@@ -14,7 +14,7 @@ class QualityMetricsDetailSummarizerImpl(
     private val outputDir: Path,
     private val reportGenerator: QualityMetricsDetailReportGenerator
 ) : QualityMetricsDetailSummarizer {
-    override fun summarize(analysisList: List<ClassAnalysis>): List<Command> {
+    override fun summarize(analysisList: List<ClassAnalysisSummary>): List<Command> {
         val report = reportGenerator.generate(analysisList)
         val path = outputDir.resolve(ReportCategory.DIFF.directory).resolve("quality-metrics-staticInvocationsThatShouldBeInverted.json")
         val command = CreateJsonFileCommand(path, report)

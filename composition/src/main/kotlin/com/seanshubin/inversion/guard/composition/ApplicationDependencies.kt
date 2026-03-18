@@ -35,6 +35,7 @@ class ApplicationDependencies(
     private val integrations: Integrations,
     private val configuration: Configuration
 ) {
+    private val setExitCode: (Int) -> Unit = integrations.setExitCode
     private val files: FilesContract = integrations.files
     private val clock: Clock = integrations.clock
     private val emit: (Any?) -> Unit = integrations.emit
@@ -49,8 +50,8 @@ class ApplicationDependencies(
     private val localBoundary: List<String> = configuration.localBoundary
     private val failOnUnknown: Boolean = configuration.failOnUnknown
     private val categoryRuleSet: Map<String, CategoryRule> = configuration.categoryRuleSet
-    val maximumAllowedErrorCount: Int = configuration.maximumAllowedErrorCount
-    val errorCountHolder: ErrorCountHolder = ErrorCountHolderImpl()
+    private val maximumAllowedErrorCount: Int = configuration.maximumAllowedErrorCount
+    private val errorCountHolder: ErrorCountHolder = ErrorCountHolderImpl()
     private val notifications: Notifications = LineEmittingNotifications(emit)
     private val stats: Stats = StatsImpl()
     private val attributeFactory: JvmAttributeFactory = JvmAttributeFactoryImpl()
@@ -171,12 +172,9 @@ class ApplicationDependencies(
         commandRunner,
         timer,
         notifications::timeTakenMillis,
-        converter
+        converter,
+        errorCountHolder,
+        setExitCode,
+        maximumAllowedErrorCount
     )
-
-    companion object {
-        fun fromConfiguration(integrations: Integrations, configuration: Configuration): ApplicationDependencies {
-            return ApplicationDependencies(integrations, configuration)
-        }
-    }
 }

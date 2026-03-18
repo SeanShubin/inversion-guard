@@ -1,6 +1,7 @@
 package com.seanshubin.inversion.guard.reporting
 
 import com.seanshubin.inversion.guard.analysis.ClassAnalysis
+import com.seanshubin.inversion.guard.analysis.ClassAnalysisSummary
 import com.seanshubin.inversion.guard.command.Command
 import com.seanshubin.inversion.guard.command.CreateTextFileCommand
 import com.seanshubin.inversion.guard.jvmspec.infrastructure.collections.Tree
@@ -20,12 +21,12 @@ class HtmlReportSummarizerImpl(
 ) : HtmlReportSummarizer {
     private val classLoader = javaClass.classLoader
 
-    override fun summarize(analysisList: List<ClassAnalysis>): List<Command> {
+    override fun summarize(analysisList: List<ClassAnalysisSummary>): List<Command> {
         val detailReport = reportGenerator.generate(analysisList)
         val staticInvocationsThatShouldBeInverted = detailReport.classes.sumOf { it.problemCount }
 
         val classPathMap = analysisList.associate { analysis ->
-            analysis.jvmClass.thisClassName to calculateDisassemblyPath(analysis.jvmClass)
+            analysis.className to calculateDisassemblyPath(analysis.className, analysis.origin)
         }
 
         val indexHtml = generateIndexHtml(staticInvocationsThatShouldBeInverted, detailReport, classPathMap)
@@ -34,14 +35,14 @@ class HtmlReportSummarizerImpl(
         val disassemblyIndexHtml = generateDisassemblyIndexHtml(analysisList, classPathMap)
         val disassemblyIndexCommand = CreateTextFileCommand(outputDir.resolve(ReportCategory.BROWSE.directory).resolve("disassembly.html"), disassemblyIndexHtml)
 
-        val classPageCommands = analysisList.map { analysis ->
-            generateClassDisassemblyPage(analysis)
-        }
-
         val cssCommand = loadResourceAsCommand("quality-metrics.css")
         val redirectCommand = loadResourceAsCommand("_index.html")
 
-        return listOf(indexCommand, disassemblyIndexCommand) + classPageCommands + listOf(cssCommand, redirectCommand)
+        return listOf(indexCommand, disassemblyIndexCommand, cssCommand, redirectCommand)
+    }
+
+    override fun generateClassPage(analysis: ClassAnalysis): Command {
+        return generateClassDisassemblyPage(analysis)
     }
 
     private fun generateIndexHtml(
@@ -63,14 +64,14 @@ class HtmlReportSummarizerImpl(
     }
 
     private fun generateDisassemblyIndexHtml(
-        analysisList: List<ClassAnalysis>,
+        analysisList: List<ClassAnalysisSummary>,
         classPathMap: Map<String, Path>
     ): String {
-        val sortedAnalyses = analysisList.sortedBy { baseDir.relativize(it.jvmClass.origin).toString() }
+        val sortedAnalyses = analysisList.sortedBy { baseDir.relativize(it.origin).toString() }
 
         val classListItems = sortedAnalyses.map { analysis ->
-            val className = analysis.jvmClass.thisClassName
-            val origin = baseDir.relativize(analysis.jvmClass.origin).toString()
+            val className = analysis.className
+            val origin = baseDir.relativize(analysis.origin).toString()
             val relativePath = classPathMap[className]?.toString() ?: "$className-disassembly.html"
 
             Tag(
@@ -376,8 +377,12 @@ class HtmlReportSummarizerImpl(
     }
 
     private fun calculateDisassemblyPath(jvmClass: JvmClass): Path {
-        val relativePath = baseDir.relativize(jvmClass.origin).parent
-        val classFileName = jvmClass.origin.fileName.toString().removeSuffix(".class")
+        return calculateDisassemblyPath(jvmClass.thisClassName, jvmClass.origin)
+    }
+
+    private fun calculateDisassemblyPath(className: String, origin: Path): Path {
+        val relativePath = baseDir.relativize(origin).parent
+        val classFileName = origin.fileName.toString().removeSuffix(".class")
         return relativePath.resolve("$classFileName-disassembly.html")
     }
 

@@ -1,6 +1,6 @@
 package com.seanshubin.inversion.guard.reporting
 
-import com.seanshubin.inversion.guard.analysis.ClassAnalysis
+import com.seanshubin.inversion.guard.analysis.ClassAnalysisSummary
 import com.seanshubin.inversion.guard.analysis.InvocationType
 import com.seanshubin.inversion.guard.analysis.MethodAnalysis
 import com.seanshubin.inversion.guard.command.Command
@@ -9,11 +9,11 @@ import com.seanshubin.inversion.guard.command.CreateJsonFileCommand
 import com.seanshubin.inversion.guard.command.CreateFileCommand
 
 interface QualityMetricsDetailReportGenerator {
-    fun generate(analysisList: List<ClassAnalysis>): QualityMetricsDetailReport
+    fun generate(analysisList: List<ClassAnalysisSummary>): QualityMetricsDetailReport
 }
 
 class QualityMetricsDetailReportGeneratorImpl : QualityMetricsDetailReportGenerator {
-    override fun generate(analysisList: List<ClassAnalysis>): QualityMetricsDetailReport {
+    override fun generate(analysisList: List<ClassAnalysisSummary>): QualityMetricsDetailReport {
         val classDetails = analysisList
             .filter { it.countProblems() > 0 }
             .map { classAnalysis ->
@@ -45,7 +45,7 @@ class QualityMetricsDetailReportGeneratorImpl : QualityMetricsDetailReportGenera
                     )
 
                 QualityMetricsClassDetail(
-                    className = classAnalysis.jvmClass.thisClassName,
+                    className = classAnalysis.className,
                     problemCount = classAnalysis.countProblems(),
                     complexity = classAnalysis.complexity(),
                     methods = methodDetails

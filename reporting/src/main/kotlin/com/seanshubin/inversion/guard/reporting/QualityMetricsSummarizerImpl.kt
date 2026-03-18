@@ -1,6 +1,6 @@
 package com.seanshubin.inversion.guard.reporting
 
-import com.seanshubin.inversion.guard.analysis.ClassAnalysis
+import com.seanshubin.inversion.guard.analysis.ClassAnalysisSummary
 import com.seanshubin.inversion.guard.analysis.InvocationType
 import com.seanshubin.inversion.guard.runtime.ErrorCountHolder
 import com.seanshubin.inversion.guard.command.Command
@@ -11,7 +11,7 @@ class QualityMetricsSummarizerImpl(
     private val outputDir: Path,
     private val errorCountHolder: ErrorCountHolder
 ) : QualityMetricsSummarizer {
-    override fun summarize(analysisList: List<ClassAnalysis>): List<Command> {
+    override fun summarize(analysisList: List<ClassAnalysisSummary>): List<Command> {
         val count = countBoundaryInvocationsInNonBoundaryMethods(analysisList)
         errorCountHolder.errorCount = count
         val metrics = QualityMetrics(
@@ -23,7 +23,7 @@ class QualityMetricsSummarizerImpl(
     }
 
     private fun countBoundaryInvocationsInNonBoundaryMethods(
-        analysisList: List<ClassAnalysis>
+        analysisList: List<ClassAnalysisSummary>
     ): Int {
         return analysisList.sumOf { classAnalysis ->
             classAnalysis.methodAnalysisList
