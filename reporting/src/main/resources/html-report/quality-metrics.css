@@ -90,6 +90,10 @@ tr:hover {
     color: #dc3545;
 }
 
+.metric-value.has-warnings {
+    color: #ffc107;
+}
+
 .metric-value.no-problems {
     color: #28a745;
 }
@@ -152,23 +156,35 @@ tr:hover {
 
 /* Invocation type-specific styling */
 .invocation-type-boundary {
-    background-color: #fff3cd;
+    background-color: #f8d7da; /* Light red */
 }
 
 .invocation-type-boundary:hover {
-    background-color: #ffe69c;
+    background-color: #f1aeb5; /* Darker red */
 }
 
 .invocation-type-unknown {
-    background-color: #f8d7da;
+    background-color: #fff3cd; /* Light yellow */
 }
 
 .invocation-type-unknown:hover {
-    background-color: #f1aeb5;
+    background-color: #ffe69c; /* Darker yellow */
 }
 
 .invocation-type-core {
-    background-color: #ffffff;
+    background-color: #d4edda; /* Light green */
+}
+
+.invocation-type-core:hover {
+    background-color: #c3e6cb; /* Darker green */
+}
+
+.invocation-type-ignore {
+    background-color: #f8f9fa; /* Light gray */
+}
+
+.invocation-type-ignore:hover {
+    background-color: #e9ecef; /* Darker gray */
 }
 
 /* Cell content styling */

@@ -50,8 +50,10 @@ class ApplicationDependencies(
     private val skipDir: List<String> = configuration.skipDir
     private val core: List<String> = configuration.core
     private val boundary: List<String> = configuration.boundary
+    private val ignore: List<String> = configuration.ignore
     private val localCore: List<String> = configuration.localCore
     private val localBoundary: List<String> = configuration.localBoundary
+    private val localIgnore: List<String> = configuration.localIgnore
     private val failOnUnknown: Boolean = configuration.failOnUnknown
     private val categoryRuleSet: Map<String, CategoryRule> = configuration.categoryRuleSet
     private val maximumAllowedErrorCount: Int = configuration.maximumAllowedErrorCount
@@ -108,7 +110,8 @@ class ApplicationDependencies(
         "core-boundary",
         mapOf(
             "core" to core,
-            "boundary" to boundary
+            "boundary" to boundary,
+            "ignore" to ignore
         ),
         stats::consumeMatchedFilterEvent,
         stats::consumeUnmatchedFilterEvent,
@@ -118,7 +121,8 @@ class ApplicationDependencies(
         stats.registerLocalPatterns(
             "core-boundary", mapOf(
                 "core" to localCore,
-                "boundary" to localBoundary
+                "boundary" to localBoundary,
+                "ignore" to localIgnore
             )
         )
     }

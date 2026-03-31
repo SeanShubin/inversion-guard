@@ -23,13 +23,13 @@ class HtmlReportSummarizerImpl(
 
     override fun summarize(analysisList: List<ClassAnalysisSummary>): List<Command> {
         val detailReport = reportGenerator.generate(analysisList)
-        val staticInvocationsThatShouldBeInverted = detailReport.classes.sumOf { it.problemCount }
+        val qualityMetrics = calculateQualityMetrics(analysisList)
 
         val classPathMap = analysisList.associate { analysis ->
             analysis.className to calculateDisassemblyPath(analysis.className, analysis.origin)
         }
 
-        val indexHtml = generateIndexHtml(staticInvocationsThatShouldBeInverted, detailReport, classPathMap)
+        val indexHtml = generateIndexHtml(qualityMetrics, detailReport, classPathMap)
         val indexCommand =
             CreateTextFileCommand(outputDir.resolve(ReportCategory.BROWSE.directory).resolve("index.html"), indexHtml)
 
@@ -45,12 +45,43 @@ class HtmlReportSummarizerImpl(
         return listOf(indexCommand, disassemblyIndexCommand, cssCommand, redirectCommand)
     }
 
+    private fun calculateQualityMetrics(analysisList: List<ClassAnalysisSummary>): QualityMetrics {
+        val metricCounts = countByQualityMetric(analysisList)
+
+        val inverted =
+            metricCounts[com.seanshubin.inversion.guard.analysis.QualityMetric.STATIC_INVOCATIONS_THAT_SHOULD_BE_INVERTED]
+                ?: 0
+        val acceptable =
+            metricCounts[com.seanshubin.inversion.guard.analysis.QualityMetric.STATIC_INVOCATIONS_THAT_ARE_ACCEPTABLE]
+                ?: 0
+        val unclassified =
+            metricCounts[com.seanshubin.inversion.guard.analysis.QualityMetric.STATIC_INVOCATIONS_THAT_SHOULD_BE_CLASSIFIED]
+                ?: 0
+
+        return QualityMetrics(
+            staticInvocationsThatShouldBeInverted = inverted,
+            staticInvocationsThatAreAcceptable = acceptable,
+            staticInvocationsThatShouldBeClassified = unclassified
+        )
+    }
+
+    private fun countByQualityMetric(
+        analysisList: List<ClassAnalysisSummary>
+    ): Map<com.seanshubin.inversion.guard.analysis.QualityMetric, Int> {
+        return analysisList
+            .flatMap { it.methodAnalysisList }
+            .filter { !it.isBoundaryLogic() }
+            .flatMap { it.staticInvocations }
+            .groupingBy { com.seanshubin.inversion.guard.analysis.mapToQualityMetric(it.invocationTypes) }
+            .eachCount()
+    }
+
     override fun generateClassPage(analysis: ClassAnalysis): Command {
         return generateClassDisassemblyPage(analysis)
     }
 
     private fun generateIndexHtml(
-        staticInvocationsThatShouldBeInverted: Int,
+        qualityMetrics: QualityMetrics,
         detailReport: QualityMetricsDetailReport,
         classPathMap: Map<String, Path>
     ): String {
@@ -59,7 +90,7 @@ class HtmlReportSummarizerImpl(
             attributes = listOf("lang" to "en"),
             children = listOf(
                 createHead(),
-                createBody(staticInvocationsThatShouldBeInverted, detailReport, classPathMap)
+                createBody(qualityMetrics, detailReport, classPathMap)
             )
         )
         val doctype = "<!DOCTYPE html>"
@@ -156,7 +187,7 @@ class HtmlReportSummarizerImpl(
     }
 
     private fun createBody(
-        staticInvocationsThatShouldBeInverted: Int,
+        qualityMetrics: QualityMetrics,
         detailReport: QualityMetricsDetailReport,
         classPathMap: Map<String, Path>
     ): HtmlElement {
@@ -164,7 +195,7 @@ class HtmlReportSummarizerImpl(
             "body",
             text("h1", "Quality Metrics Report"),
             createTableOfContents(),
-            createQualityMetricsSection(staticInvocationsThatShouldBeInverted),
+            createQualityMetricsSection(qualityMetrics),
             createStaticInvocationDetailSection(detailReport, classPathMap)
         )
     }
@@ -204,15 +235,14 @@ class HtmlReportSummarizerImpl(
     }
 
     private fun createQualityMetricsSection(
-        staticInvocationsThatShouldBeInverted: Int
+        qualityMetrics: QualityMetrics
     ): HtmlElement {
-        val cssClass = if (staticInvocationsThatShouldBeInverted > 0) "has-problems" else "no-problems"
         return Tag(
             "section",
             attributes = listOf("id" to "quality-metrics"),
             children = listOf(
                 text("h2", "Quality Metrics"),
-                createSummaryTable(staticInvocationsThatShouldBeInverted, cssClass)
+                createSummaryTable(qualityMetrics)
             )
         )
     }
@@ -231,7 +261,12 @@ class HtmlReportSummarizerImpl(
         )
     }
 
-    private fun createSummaryTable(count: Int, cssClass: String): HtmlElement {
+    private fun createSummaryTable(qualityMetrics: QualityMetrics): HtmlElement {
+        val invertedCssClass =
+            if (qualityMetrics.staticInvocationsThatShouldBeInverted > 0) "has-problems" else "no-problems"
+        val unclassifiedCssClass =
+            if (qualityMetrics.staticInvocationsThatShouldBeClassified > 0) "has-warnings" else "no-problems"
+
         return Tag(
             "table",
             attributes = listOf("class" to "summary-table"),
@@ -251,8 +286,26 @@ class HtmlReportSummarizerImpl(
                         text("td", "staticInvocationsThatShouldBeInverted"),
                         Tag(
                             "td",
-                            attributes = listOf("class" to "metric-value $cssClass"),
-                            children = listOf(Text(count.toString()))
+                            attributes = listOf("class" to "metric-value $invertedCssClass"),
+                            children = listOf(Text(qualityMetrics.staticInvocationsThatShouldBeInverted.toString()))
+                        )
+                    ),
+                    Tag(
+                        "tr",
+                        text("td", "staticInvocationsThatAreAcceptable"),
+                        Tag(
+                            "td",
+                            attributes = listOf("class" to "metric-value no-problems"),
+                            children = listOf(Text(qualityMetrics.staticInvocationsThatAreAcceptable.toString()))
+                        )
+                    ),
+                    Tag(
+                        "tr",
+                        text("td", "staticInvocationsThatShouldBeClassified"),
+                        Tag(
+                            "td",
+                            attributes = listOf("class" to "metric-value $unclassifiedCssClass"),
+                            children = listOf(Text(qualityMetrics.staticInvocationsThatShouldBeClassified.toString()))
                         )
                     )
                 )

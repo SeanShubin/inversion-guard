@@ -50,6 +50,12 @@ object ConfigDocumentation {
         "Boundary classes handle external interactions (I/O, network, databases)",
         "Local rules are combined with global rules from the globalRules file"
     )
+    val localRulesIgnore = listOf(
+        "List of package patterns to ignore in analysis in addition to global rules",
+        "Ignored classes are not reported as violations and are considered acceptable",
+        "Useful for excluding third-party libraries or framework code from analysis",
+        "Local rules are combined with global rules from the globalRules file"
+    )
     val failOnUnknown = listOf(
         "Whether to fail the build if classes are found that don't match any category",
         "When true, all classes must be categorized as either core or boundary",

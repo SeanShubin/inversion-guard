@@ -10,10 +10,6 @@ data class MethodAnalysis(
     val boundaryLogicCategories: Set<String>,
     val staticInvocations: List<InvocationAnalysis>
 ) {
-    fun countStaticInvocations(invocationType: InvocationType): Int {
-        return staticInvocations.count { it.invocationType == invocationType }
-    }
-
     fun isBoundaryLogic(): Boolean {
         return boundaryLogicCategories.isNotEmpty()
     }

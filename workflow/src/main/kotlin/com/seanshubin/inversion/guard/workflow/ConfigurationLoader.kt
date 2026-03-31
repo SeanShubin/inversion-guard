@@ -79,6 +79,11 @@ class ConfigurationLoader(
             emptyList<String>(),
             ConfigDocumentation.localRulesBoundary
         ).toTypedList<String>()
+        val localIgnore = config.load(
+            listOf("localRules", "ignore"),
+            emptyList<String>(),
+            ConfigDocumentation.localRulesIgnore
+        ).toTypedList<String>()
         val failOnUnknown = config.load(
             listOf("failOnUnknown"),
             false,
@@ -108,8 +113,10 @@ class ConfigurationLoader(
         val categories = rulesData.categories
         val globalCore = rulesData.core
         val globalBoundary = rulesData.boundary
+        val globalIgnore = rulesData.ignore
         val core = localCore + globalCore
         val boundary = localBoundary + globalBoundary
+        val ignore = localIgnore + globalIgnore
 
         return Configuration(
             baseDir,
@@ -119,8 +126,10 @@ class ConfigurationLoader(
             skipDir,
             core,
             boundary,
+            ignore,
             localCore,
             localBoundary,
+            localIgnore,
             failOnUnknown,
             categories,
             maximumAllowedErrorCount

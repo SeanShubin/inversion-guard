@@ -58,7 +58,13 @@ class AnalysisSummarizerImpl(
         val compactSyntax =
             invocationAnalysis.signature.compactFormat()
         val opcodeName = invocationAnalysis.invocationOpcodeName
-        val invocationTypeName = invocationAnalysis.invocationType.name
+        val invocationTypeName = if (invocationAnalysis.invocationTypes.isEmpty()) {
+            "UNCLASSIFIED"
+        } else if (invocationAnalysis.invocationTypes.size == 1) {
+            invocationAnalysis.invocationTypes.first().name
+        } else {
+            "[${invocationAnalysis.invocationTypes.joinToString(", ") { it.name }}]"
+        }
         return Tree("$invocationTypeName $opcodeName $compactSyntax")
     }
 }

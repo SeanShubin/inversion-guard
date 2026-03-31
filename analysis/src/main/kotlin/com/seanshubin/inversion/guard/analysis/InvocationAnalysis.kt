@@ -7,5 +7,5 @@ data class InvocationAnalysis(
     val methodName: String,
     val signature: Signature,
     val invocationOpcodeName: String,
-    val invocationType: InvocationType
+    val invocationTypes: Set<InvocationType>
 )

@@ -17,8 +17,15 @@ class QualityMetricsDetailReportGeneratorImpl : QualityMetricsDetailReportGenera
                     .map { methodAnalysis ->
                         val invocationDetails = methodAnalysis.staticInvocations
                             .map { invocation ->
+                                val invocationTypeName = if (invocation.invocationTypes.isEmpty()) {
+                                    "UNCLASSIFIED"
+                                } else if (invocation.invocationTypes.size == 1) {
+                                    invocation.invocationTypes.first().name
+                                } else {
+                                    "[${invocation.invocationTypes.joinToString(", ") { it.name }}]"
+                                }
                                 QualityMetricsInvocationDetail(
-                                    invocationType = invocation.invocationType.name,
+                                    invocationType = invocationTypeName,
                                     opcode = invocation.invocationOpcodeName,
                                     className = invocation.className,
                                     methodName = invocation.methodName,

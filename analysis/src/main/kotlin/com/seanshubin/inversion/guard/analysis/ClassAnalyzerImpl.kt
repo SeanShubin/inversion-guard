@@ -61,28 +61,37 @@ class ClassAnalyzerImpl(
         val methodDescriptor = constant.jvmNameAndType.descriptor
         val descriptor = DescriptorParser.build(methodDescriptor)
         val signature = Signature(className, methodName, descriptor)
-        val invocationType = checkInvocationType(signature)
+        val invocationTypes = checkInvocationType(signature)
         return InvocationAnalysis(
             className,
             methodName,
             signature,
             opcodeName,
-            invocationType
+            invocationTypes
         )
     }
 
-    private fun checkInvocationType(signature: Signature): InvocationType {
+    private fun checkInvocationType(signature: Signature): Set<InvocationType> {
         val compact = signature.compactFormat()
         val filterResult = coreBoundaryFilter.match(compact)
-        val invocationType = when {
-            filterResult.isEmpty() -> {
-                if (failOnUnknown) throw RuntimeException("Unknown invocation: $compact")
-                InvocationType.UNKNOWN
-            }
 
-            filterResult == setOf("core") -> InvocationType.CORE
-            else -> InvocationType.BOUNDARY
+        if (filterResult.isEmpty()) {
+            if (failOnUnknown) throw RuntimeException("Unknown invocation: $compact")
+            return emptySet()
         }
-        return invocationType
+
+        val types = mutableSetOf<InvocationType>()
+
+        if (filterResult.contains("ignore")) {
+            types.add(InvocationType.IGNORE)
+        }
+        if (filterResult.contains("core")) {
+            types.add(InvocationType.CORE)
+        }
+        if (filterResult.contains("boundary")) {
+            types.add(InvocationType.BOUNDARY)
+        }
+
+        return types
     }
 }
