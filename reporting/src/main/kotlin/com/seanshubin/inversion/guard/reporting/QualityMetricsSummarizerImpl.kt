@@ -17,6 +17,7 @@ class QualityMetricsSummarizerImpl(
 
         val inverted = metricCounts[QualityMetric.STATIC_INVOCATIONS_THAT_SHOULD_BE_INVERTED] ?: 0
         val acceptable = metricCounts[QualityMetric.STATIC_INVOCATIONS_THAT_ARE_ACCEPTABLE] ?: 0
+        val ignored = metricCounts[QualityMetric.STATIC_INVOCATIONS_THAT_ARE_IGNORED] ?: 0
         val unclassified = metricCounts[QualityMetric.STATIC_INVOCATIONS_THAT_SHOULD_BE_CLASSIFIED] ?: 0
 
         errorCountHolder.errorCount = inverted
@@ -24,6 +25,7 @@ class QualityMetricsSummarizerImpl(
         val metrics = QualityMetrics(
             staticInvocationsThatShouldBeInverted = inverted,
             staticInvocationsThatAreAcceptable = acceptable,
+            staticInvocationsThatAreIgnored = ignored,
             staticInvocationsThatShouldBeClassified = unclassified
         )
 

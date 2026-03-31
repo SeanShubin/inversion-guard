@@ -54,6 +54,9 @@ class HtmlReportSummarizerImpl(
         val acceptable =
             metricCounts[com.seanshubin.inversion.guard.analysis.QualityMetric.STATIC_INVOCATIONS_THAT_ARE_ACCEPTABLE]
                 ?: 0
+        val ignored =
+            metricCounts[com.seanshubin.inversion.guard.analysis.QualityMetric.STATIC_INVOCATIONS_THAT_ARE_IGNORED]
+                ?: 0
         val unclassified =
             metricCounts[com.seanshubin.inversion.guard.analysis.QualityMetric.STATIC_INVOCATIONS_THAT_SHOULD_BE_CLASSIFIED]
                 ?: 0
@@ -61,6 +64,7 @@ class HtmlReportSummarizerImpl(
         return QualityMetrics(
             staticInvocationsThatShouldBeInverted = inverted,
             staticInvocationsThatAreAcceptable = acceptable,
+            staticInvocationsThatAreIgnored = ignored,
             staticInvocationsThatShouldBeClassified = unclassified
         )
     }
@@ -297,6 +301,15 @@ class HtmlReportSummarizerImpl(
                             "td",
                             attributes = listOf("class" to "metric-value no-problems"),
                             children = listOf(Text(qualityMetrics.staticInvocationsThatAreAcceptable.toString()))
+                        )
+                    ),
+                    Tag(
+                        "tr",
+                        text("td", "staticInvocationsThatAreIgnored"),
+                        Tag(
+                            "td",
+                            attributes = listOf("class" to "metric-value no-problems"),
+                            children = listOf(Text(qualityMetrics.staticInvocationsThatAreIgnored.toString()))
                         )
                     ),
                     Tag(
