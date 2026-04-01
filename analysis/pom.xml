@@ -25,7 +25,7 @@
         </dependency>
         <dependency>
             <groupId>com.seanshubin.inversion.guard</groupId>
-            <artifactId>inversion-guard-jvmspec-rules</artifactId>
+            <artifactId>inversion-guard-rules</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>

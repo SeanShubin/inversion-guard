@@ -6,7 +6,7 @@ import com.seanshubin.inversion.guard.dynamic.core.KeyValueStoreWithDocumentatio
 import com.seanshubin.inversion.guard.dynamic.core.KeyValueStoreWithDocumentationDelegate
 import com.seanshubin.inversion.guard.dynamic.json.JsonFileKeyValueStore
 import com.seanshubin.inversion.guard.jvmspec.infrastructure.types.TypeSafety.toTypedList
-import com.seanshubin.inversion.guard.jvmspec.rules.RuleLoader
+import com.seanshubin.inversion.guard.rules.RuleLoader
 import java.nio.file.Path
 import java.nio.file.Paths
 

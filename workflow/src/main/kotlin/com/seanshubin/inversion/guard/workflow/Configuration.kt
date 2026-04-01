@@ -1,6 +1,6 @@
 package com.seanshubin.inversion.guard.workflow
 
-import com.seanshubin.inversion.guard.jvmspec.rules.CategoryRule
+import com.seanshubin.inversion.guard.rules.CategoryRule
 import java.nio.file.Path
 
 data class Configuration(

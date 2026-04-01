@@ -1,7 +1,7 @@
 package com.seanshubin.inversion.guard.composition
 
-import com.seanshubin.inversion.guard.jvmspec.rules.JsonRuleLoader
-import com.seanshubin.inversion.guard.jvmspec.rules.RuleLoader
+import com.seanshubin.inversion.guard.rules.JsonRuleLoader
+import com.seanshubin.inversion.guard.rules.RuleLoader
 import com.seanshubin.inversion.guard.workflow.ConfigurationLoader
 
 class BootstrapDependencies(

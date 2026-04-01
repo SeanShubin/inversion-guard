@@ -4,7 +4,7 @@ import com.seanshubin.inversion.guard.jvmspec.analysis.filtering.Filter
 import com.seanshubin.inversion.guard.jvmspec.classfile.descriptor.DescriptorParser
 import com.seanshubin.inversion.guard.jvmspec.classfile.descriptor.Signature
 import com.seanshubin.inversion.guard.jvmspec.model.api.*
-import com.seanshubin.inversion.guard.jvmspec.rules.RuleInterpreter
+import com.seanshubin.inversion.guard.rules.RuleInterpreter
 
 class ClassAnalyzerImpl(
     private val coreBoundaryFilter: Filter,

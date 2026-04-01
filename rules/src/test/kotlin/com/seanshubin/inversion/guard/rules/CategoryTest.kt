@@ -1,15 +1,7 @@
-package com.seanshubin.inversion.guard.jvmspec.rules
+package com.seanshubin.inversion.guard.rules
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
-
-//
-// This file was imported from: ../jvmspec
-// Module: rules
-//
-// Before editing this file, consider whether updating the source project
-// and re-importing would be a better approach.
-//
 
 class CategoryTest {
     companion object {

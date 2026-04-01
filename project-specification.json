@@ -73,7 +73,7 @@
       "jackson",
       "jackson-time"
     ],
-    "jvmspec-rules": [
+    "rules": [
       "jackson",
       "jackson-time"
     ],
@@ -86,7 +86,7 @@
       "di-contract",
       "jvmspec-analysis",
       "jvmspec-classfile",
-      "jvmspec-rules"
+      "rules"
     ],
     "reporting": [
       "analysis",
@@ -139,8 +139,7 @@
         "classfile": "jvmspec-classfile",
         "model": "jvmspec-model",
         "output": "jvmspec-output",
-        "runtime": "jvmspec-runtime",
-        "rules": "jvmspec-rules"
+        "runtime": "jvmspec-runtime"
       }
     },
     {

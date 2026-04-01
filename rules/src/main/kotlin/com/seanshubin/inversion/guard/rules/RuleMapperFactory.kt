@@ -1,4 +1,4 @@
-package com.seanshubin.inversion.guard.jvmspec.rules
+package com.seanshubin.inversion.guard.rules
 
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.databind.DeserializationContext
@@ -7,14 +7,6 @@ import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.module.SimpleModule
 import com.fasterxml.jackson.module.kotlin.KotlinModule
-
-//
-// This file was imported from: ../jvmspec
-// Module: rules
-//
-// Before editing this file, consider whether updating the source project
-// and re-importing would be a better approach.
-//
 
 object RuleMapperFactory {
     fun createObjectMapper(): ObjectMapper {

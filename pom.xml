@@ -47,7 +47,7 @@
         <module>jvmspec-model</module>
         <module>jvmspec-output</module>
         <module>jvmspec-runtime</module>
-        <module>jvmspec-rules</module>
+        <module>rules</module>
         <module>file-selection</module>
         <module>analysis</module>
         <module>reporting</module>

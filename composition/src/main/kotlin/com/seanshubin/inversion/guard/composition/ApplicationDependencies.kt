@@ -25,8 +25,8 @@ import com.seanshubin.inversion.guard.jvmspec.model.implementation.JvmFieldFacto
 import com.seanshubin.inversion.guard.jvmspec.model.implementation.JvmMethodFactoryImpl
 import com.seanshubin.inversion.guard.jvmspec.output.formatting.JvmSpecFormat
 import com.seanshubin.inversion.guard.jvmspec.output.formatting.JvmSpecFormatDetailed
-import com.seanshubin.inversion.guard.jvmspec.rules.CategoryRule
-import com.seanshubin.inversion.guard.jvmspec.rules.RuleInterpreter
+import com.seanshubin.inversion.guard.rules.CategoryRule
+import com.seanshubin.inversion.guard.rules.RuleInterpreter
 import com.seanshubin.inversion.guard.reporting.*
 import com.seanshubin.inversion.guard.runtime.Environment
 import com.seanshubin.inversion.guard.runtime.EnvironmentImpl
