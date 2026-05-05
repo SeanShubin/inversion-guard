@@ -56,6 +56,7 @@
         <module>workflow</module>
         <module>composition</module>
         <module>console</module>
+        <module>duration-format</module>
         <module>dynamic-core</module>
         <module>dynamic-json</module>
         <module>di-contract</module>

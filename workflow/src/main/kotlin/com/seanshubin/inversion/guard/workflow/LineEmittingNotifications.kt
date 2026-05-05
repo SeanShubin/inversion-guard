@@ -2,7 +2,7 @@ package com.seanshubin.inversion.guard.workflow
 
 import com.seanshubin.inversion.guard.command.Command
 import com.seanshubin.inversion.guard.command.CreateFileCommand
-import com.seanshubin.inversion.guard.jvmspec.infrastructure.time.DurationFormat
+import com.seanshubin.inversion.guard.duration.format.DurationFormat
 
 class LineEmittingNotifications(
     private val emit: (Any?) -> Unit

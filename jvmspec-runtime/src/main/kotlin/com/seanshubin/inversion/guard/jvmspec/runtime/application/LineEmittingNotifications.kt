@@ -2,7 +2,7 @@ package com.seanshubin.inversion.guard.jvmspec.runtime.application
 
 import com.seanshubin.inversion.guard.jvmspec.infrastructure.command.Command
 import com.seanshubin.inversion.guard.jvmspec.infrastructure.command.CommandRunner
-import com.seanshubin.inversion.guard.jvmspec.infrastructure.time.DurationFormat
+import com.seanshubin.inversion.guard.duration.format.DurationFormat
 import java.nio.file.Path
 
 //

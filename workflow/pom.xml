@@ -43,6 +43,11 @@
             <artifactId>inversion-guard-jvmspec-runtime</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.seanshubin.inversion.guard</groupId>
+            <artifactId>inversion-guard-duration-format</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
     <parent>
         <groupId>com.seanshubin.inversion.guard</groupId>
