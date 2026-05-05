@@ -4,7 +4,8 @@ import com.seanshubin.inversion.guard.analysis.ClassAnalysisSummary
 import com.seanshubin.inversion.guard.analysis.ClassAnalyzer
 import com.seanshubin.inversion.guard.command.CommandRunner
 import com.seanshubin.inversion.guard.di.contract.FilesContract
-import com.seanshubin.inversion.guard.fileselection.FileSelector
+import com.seanshubin.inversion.guard.fileselection.FileChooser
+import com.seanshubin.inversion.guard.fileselection.FileSelection
 import com.seanshubin.inversion.guard.jvmspec.analysis.statistics.Stats
 import com.seanshubin.inversion.guard.jvmspec.infrastructure.time.Timer
 import com.seanshubin.inversion.guard.jvmspec.model.conversion.Converter
@@ -16,7 +17,8 @@ import com.seanshubin.inversion.guard.runtime.ErrorCountHolder
 
 class RunnerImpl(
     private val files: FilesContract,
-    private val fileSelector: FileSelector,
+    private val fileChooser: FileChooser,
+    private val fileSelection: FileSelection,
     private val classAnalyzer: ClassAnalyzer,
     private val qualityMetricsSummarizer: QualityMetricsSummarizer,
     private val qualityMetricsDetailSummarizer: QualityMetricsDetailSummarizer,
@@ -35,7 +37,7 @@ class RunnerImpl(
         val durationMillis = timer.withTimerMilliseconds {
             val analysisList = mutableListOf<ClassAnalysisSummary>()
 
-            fileSelector.map { file ->
+            fileChooser.choose(fileSelection).forEach { file ->
                 try {
                     val jvmClass = with(converter) { file.toJvmClass(files, file) }
                     val analysis = classAnalyzer.analyzeClass(jvmClass)

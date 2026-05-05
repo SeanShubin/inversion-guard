@@ -5,10 +5,9 @@ import com.seanshubin.inversion.guard.analysis.ClassAnalyzerImpl
 import com.seanshubin.inversion.guard.command.CommandRunner
 import com.seanshubin.inversion.guard.command.CommandRunnerImpl
 import com.seanshubin.inversion.guard.di.contract.FilesContract
-import com.seanshubin.inversion.guard.fileselection.FileSelector
-import com.seanshubin.inversion.guard.fileselection.FileSelectorFileVisitorFactory
-import com.seanshubin.inversion.guard.fileselection.FileSelectorFileVisitorFactoryImpl
-import com.seanshubin.inversion.guard.fileselection.FileSelectorImpl
+import com.seanshubin.inversion.guard.fileselection.FileChooser
+import com.seanshubin.inversion.guard.fileselection.FileChooserImpl
+import com.seanshubin.inversion.guard.fileselection.FileSelection
 import com.seanshubin.inversion.guard.jvmspec.analysis.filtering.Filter
 import com.seanshubin.inversion.guard.jvmspec.analysis.filtering.RegexFilter
 import com.seanshubin.inversion.guard.jvmspec.analysis.statistics.Stats
@@ -65,45 +64,13 @@ class ApplicationDependencies(
     private val fieldFactory: JvmFieldFactory = JvmFieldFactoryImpl(attributeFactory)
     private val classFactory: JvmClassFactory = JvmClassFactoryImpl(methodFactory, fieldFactory, attributeFactory)
     private val converter: Converter = Converter(classFactory)
-    private val classFileNameFilter: Filter = RegexFilter(
-        "class-file-name",
-        mapOf(
-            "includeFile" to includeFile,
-            "excludeFile" to excludeFile
-        ),
-        stats::consumeMatchedFilterEvent,
-        stats::consumeUnmatchedFilterEvent,
-        stats::registerPatterns
-    ).also {
-        // All patterns for class-file-name are local (from config)
-        stats.registerLocalPatterns(
-            "class-file-name", mapOf(
-                "includeFile" to includeFile,
-                "excludeFile" to excludeFile
-            )
-        )
-    }
-    private val directoryFilter: Filter = RegexFilter(
-        "directory-name",
-        mapOf(
-            "skipDir" to skipDir
-        ),
-        stats::consumeMatchedFilterEvent,
-        stats::consumeUnmatchedFilterEvent,
-        stats::registerPatterns
-    ).also {
-        // All patterns for directory-name are local (from config)
-        stats.registerLocalPatterns(
-            "directory-name", mapOf(
-                "skipDir" to skipDir
-            )
-        )
-    }
-    private val fileSelectorFileVisitorFactory: FileSelectorFileVisitorFactory = FileSelectorFileVisitorFactoryImpl(
-        directoryFilter,
-        classFileNameFilter
+    private val fileSelection: FileSelection = FileSelection(
+        baseDir = baseDir,
+        includePatterns = includeFile,
+        excludePatterns = excludeFile,
+        skipDirectoryPatterns = skipDir
     )
-    private val fileSelector: FileSelector = FileSelectorImpl(baseDir, files, fileSelectorFileVisitorFactory)
+    private val fileChooser: FileChooser = FileChooserImpl(files)
     private val jvmSpecFormat: JvmSpecFormat = JvmSpecFormatDetailed()
     private val ruleInterpreter: RuleInterpreter = RuleInterpreter(categoryRuleSet)
     private val coreBoundaryFilter: Filter = RegexFilter(
@@ -169,7 +136,8 @@ class ApplicationDependencies(
     private val timer: Timer = Timer(clock)
     val runner: Runner = RunnerImpl(
         files,
-        fileSelector,
+        fileChooser,
+        fileSelection,
         classAnalyzer,
         qualityMetricsSummarizer,
         qualityMetricsDetailSummarizer,

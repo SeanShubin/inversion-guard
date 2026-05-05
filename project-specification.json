@@ -78,8 +78,7 @@
       "jackson-time"
     ],
     "file-selection": [
-      "di-contract",
-      "jvmspec-analysis"
+      "di-delegate"
     ],
     "analysis": [
       "jvmspec-model",
@@ -148,7 +147,8 @@
         "dynamic-core": "dynamic-core",
         "dynamic-json": "dynamic-json",
         "di-contract": "di-contract",
-        "di-delegate": "di-delegate"
+        "di-delegate": "di-delegate",
+        "file-selection": "file-selection"
       }
     }
   ],
