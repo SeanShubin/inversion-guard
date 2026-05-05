@@ -71,7 +71,8 @@
       "di-contract",
       "di-delegate",
       "jackson",
-      "jackson-time"
+      "jackson-time",
+      "duration-format"
     ],
     "rules": [
       "jackson",
