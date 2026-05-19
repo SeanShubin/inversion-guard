@@ -11,14 +11,12 @@ import java.nio.file.Path
 import java.nio.file.Paths
 
 class ConfigurationLoader(
-    private val args: Array<String>,
+    private val configBaseName: String,
     private val files: FilesContract,
     private val ruleLoader: RuleLoader
 ) {
     fun load(): Configuration {
-        val configPathName = args.getOrNull(0) ?: "inversion-guard-config.json"
-        val configPath = Path.of(configPathName)
-        val configBaseName = configPath.toString().removeSuffix("-config.json").removeSuffix(".json")
+        val configPath = Paths.get("$configBaseName-config.json")
         val configDocumentationFile = Paths.get("$configBaseName-documentation.json")
 
         val keyValueStore: KeyValueStore = JsonFileKeyValueStore(files, configPath)

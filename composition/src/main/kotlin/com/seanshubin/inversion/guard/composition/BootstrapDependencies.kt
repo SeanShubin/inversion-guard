@@ -10,5 +10,6 @@ class BootstrapDependencies(
     private val files = integrations.files
     private val ruleLoader: RuleLoader = JsonRuleLoader()
     private val args = integrations.commandLineArgs
-    val configurationLoader = ConfigurationLoader(args, files, ruleLoader)
+    private val configBaseName = args.getOrNull(0) ?: "inversion-guard"
+    val configurationLoader = ConfigurationLoader(configBaseName, files, ruleLoader)
 }
