@@ -4,5 +4,5 @@ import com.seanshubin.inversion.guard.analysis.ClassAnalysisSummary
 import com.seanshubin.inversion.guard.command.Command
 
 interface QualityMetricsSummarizer {
-    fun summarize(analysisList: List<ClassAnalysisSummary>): List<Command>
+    fun summarize(analysisList: List<ClassAnalysisSummary>): Pair<QualityMetrics, List<Command>>
 }

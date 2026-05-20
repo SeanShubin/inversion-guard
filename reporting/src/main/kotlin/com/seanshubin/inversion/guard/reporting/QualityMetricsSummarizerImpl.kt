@@ -12,7 +12,7 @@ class QualityMetricsSummarizerImpl(
     private val outputDir: Path,
     private val errorCountHolder: ErrorCountHolder
 ) : QualityMetricsSummarizer {
-    override fun summarize(analysisList: List<ClassAnalysisSummary>): List<Command> {
+    override fun summarize(analysisList: List<ClassAnalysisSummary>): Pair<QualityMetrics, List<Command>> {
         val metricCounts = countByQualityMetric(analysisList)
 
         val inverted = metricCounts[QualityMetric.STATIC_INVOCATIONS_THAT_SHOULD_BE_INVERTED] ?: 0
@@ -31,7 +31,7 @@ class QualityMetricsSummarizerImpl(
 
         val path = outputDir.resolve(ReportCategory.COUNT.directory).resolve("quality-metrics.json")
         val command = CreateJsonFileCommand(path, metrics)
-        return listOf(command)
+        return Pair(metrics, listOf(command))
     }
 
     private fun countByQualityMetric(

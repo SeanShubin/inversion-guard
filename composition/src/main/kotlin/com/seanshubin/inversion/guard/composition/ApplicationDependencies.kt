@@ -133,6 +133,9 @@ class ApplicationDependencies(
         outputDir
     )
 
+    private val summaryEvent: (com.seanshubin.inversion.guard.reporting.QualityMetrics) -> Unit = { metrics ->
+        notifications.summaryEvent(metrics, maximumAllowedErrorCount, outputDir)
+    }
     private val timer: Timer = Timer(clock)
     val runner: Runner = RunnerImpl(
         files,
@@ -148,6 +151,7 @@ class ApplicationDependencies(
         commandRunner,
         timer,
         notifications::timeTakenMillis,
+        summaryEvent,
         converter,
         errorCountHolder,
         maximumAllowedErrorCount

@@ -11,6 +11,7 @@ import com.seanshubin.inversion.guard.jvmspec.infrastructure.time.Timer
 import com.seanshubin.inversion.guard.jvmspec.model.conversion.Converter
 import com.seanshubin.inversion.guard.reporting.HtmlReportSummarizer
 import com.seanshubin.inversion.guard.reporting.HtmlStatsSummarizer
+import com.seanshubin.inversion.guard.reporting.QualityMetrics
 import com.seanshubin.inversion.guard.reporting.QualityMetricsDetailSummarizer
 import com.seanshubin.inversion.guard.reporting.QualityMetricsSummarizer
 import com.seanshubin.inversion.guard.runtime.ErrorCountHolder
@@ -29,6 +30,7 @@ class RunnerImpl(
     private val commandRunner: CommandRunner,
     private val timer: Timer,
     private val timeTakenEvent: (Long) -> Unit,
+    private val summaryEvent: (QualityMetrics) -> Unit,
     private val converter: Converter,
     private val errorCountHolder: ErrorCountHolder,
     private val maximumAllowedErrorCount: Int
@@ -58,9 +60,9 @@ class RunnerImpl(
             }
 
             // Generate and write summary reports
-            val summaryCommands = qualityMetricsSummarizer.summarize(
-                analysisList
-            ) + qualityMetricsDetailSummarizer.summarize(analysisList) + htmlReportSummarizer.summarize(analysisList) + htmlStatsSummarizer.summarize(
+            val (qualityMetrics, metricsCommands) = qualityMetricsSummarizer.summarize(analysisList)
+            summaryEvent(qualityMetrics)
+            val summaryCommands = metricsCommands + qualityMetricsDetailSummarizer.summarize(analysisList) + htmlReportSummarizer.summarize(analysisList) + htmlStatsSummarizer.summarize(
                 stats
             )
             summaryCommands.forEach { command ->
