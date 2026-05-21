@@ -133,7 +133,7 @@ class ApplicationDependencies(
         outputDir
     )
 
-    private val summaryEvent: (com.seanshubin.inversion.guard.reporting.QualityMetrics) -> Unit = { metrics ->
+    private val summaryEvent: (QualityMetrics) -> Unit = { metrics ->
         notifications.summaryEvent(metrics, maximumAllowedErrorCount, outputDir)
     }
     private val timer: Timer = Timer(clock)

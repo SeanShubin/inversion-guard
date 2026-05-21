@@ -2,6 +2,8 @@ package com.seanshubin.inversion.guard.reporting
 
 import com.seanshubin.inversion.guard.analysis.ClassAnalysis
 import com.seanshubin.inversion.guard.analysis.ClassAnalysisSummary
+import com.seanshubin.inversion.guard.analysis.QualityMetric
+import com.seanshubin.inversion.guard.analysis.mapToQualityMetric
 import com.seanshubin.inversion.guard.command.Command
 import com.seanshubin.inversion.guard.command.CreateTextFileCommand
 import com.seanshubin.inversion.guard.jvmspec.infrastructure.collections.Tree
@@ -49,16 +51,16 @@ class HtmlReportSummarizerImpl(
         val metricCounts = countByQualityMetric(analysisList)
 
         val inverted =
-            metricCounts[com.seanshubin.inversion.guard.analysis.QualityMetric.STATIC_INVOCATIONS_THAT_SHOULD_BE_INVERTED]
+            metricCounts[QualityMetric.STATIC_INVOCATIONS_THAT_SHOULD_BE_INVERTED]
                 ?: 0
         val acceptable =
-            metricCounts[com.seanshubin.inversion.guard.analysis.QualityMetric.STATIC_INVOCATIONS_THAT_ARE_ACCEPTABLE]
+            metricCounts[QualityMetric.STATIC_INVOCATIONS_THAT_ARE_ACCEPTABLE]
                 ?: 0
         val ignored =
-            metricCounts[com.seanshubin.inversion.guard.analysis.QualityMetric.STATIC_INVOCATIONS_THAT_ARE_IGNORED]
+            metricCounts[QualityMetric.STATIC_INVOCATIONS_THAT_ARE_IGNORED]
                 ?: 0
         val unclassified =
-            metricCounts[com.seanshubin.inversion.guard.analysis.QualityMetric.STATIC_INVOCATIONS_THAT_SHOULD_BE_CLASSIFIED]
+            metricCounts[QualityMetric.STATIC_INVOCATIONS_THAT_SHOULD_BE_CLASSIFIED]
                 ?: 0
 
         return QualityMetrics(
@@ -71,12 +73,12 @@ class HtmlReportSummarizerImpl(
 
     private fun countByQualityMetric(
         analysisList: List<ClassAnalysisSummary>
-    ): Map<com.seanshubin.inversion.guard.analysis.QualityMetric, Int> {
+    ): Map<QualityMetric, Int> {
         return analysisList
             .flatMap { it.methodAnalysisList }
             .filter { !it.isBoundaryLogic() }
             .flatMap { it.staticInvocations }
-            .groupingBy { com.seanshubin.inversion.guard.analysis.mapToQualityMetric(it.invocationTypes) }
+            .groupingBy { mapToQualityMetric(it.invocationTypes) }
             .eachCount()
     }
 
