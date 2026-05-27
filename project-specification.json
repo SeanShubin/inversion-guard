@@ -160,5 +160,6 @@
   "entryPoints": {
     "console": "com.seanshubin.inversion.guard.console.InversionGuardApp"
   },
-  "exports": []
+  "exports": [],
+  "generateCodeStructure": true
 }
