@@ -161,5 +161,9 @@
     "console": "com.seanshubin.inversion.guard.console.InversionGuardApp"
   },
   "exports": [],
-  "generateCodeStructure": true
+  "generateCodeStructure": true,
+  "versionOverrides": [],
+  "mavenPlugin": [],
+  "gradlePlugin": [],
+  "publishToMavenCentral": false
 }
