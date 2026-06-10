@@ -1,7 +1,18 @@
 package com.seanshubin.inversion.guard.reporting
 
 data class QualityMetricsDetailReport(
-    val classes: List<QualityMetricsClassDetail>
+    val classes: List<QualityMetricsClassDetail>,
+    val boundaryLogicClasses: List<BoundaryLogicClassDetail>
+)
+
+data class BoundaryLogicClassDetail(
+    val className: String,
+    val methods: List<BoundaryLogicMethodDetail>
+)
+
+data class BoundaryLogicMethodDetail(
+    val methodSignature: String,
+    val boundaryLogicCategories: List<String>
 )
 
 data class QualityMetricsClassDetail(

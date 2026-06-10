@@ -202,7 +202,8 @@ class HtmlReportSummarizerImpl(
             text("h1", "Quality Metrics Report"),
             createTableOfContents(),
             createQualityMetricsSection(qualityMetrics),
-            createStaticInvocationDetailSection(detailReport, classPathMap)
+            createStaticInvocationDetailSection(detailReport, classPathMap),
+            createBoundaryLogicSection(detailReport, classPathMap)
         )
     }
 
@@ -218,6 +219,22 @@ class HtmlReportSummarizerImpl(
                         "a",
                         attributes = listOf("href" to "#quality-metrics"),
                         children = listOf(Text("Quality Metrics"))
+                    )
+                ),
+                Tag(
+                    "li",
+                    Tag(
+                        "a",
+                        attributes = listOf("href" to "#static-invocation-detail"),
+                        children = listOf(Text("Static Invocation Detail"))
+                    )
+                ),
+                Tag(
+                    "li",
+                    Tag(
+                        "a",
+                        attributes = listOf("href" to "#boundary-logic-classes"),
+                        children = listOf(Text("Boundary Logic Classes"))
                     )
                 ),
                 Tag(
@@ -453,6 +470,100 @@ class HtmlReportSummarizerImpl(
                 )
             )
         )
+    }
+
+    private fun createBoundaryLogicSection(
+        detailReport: QualityMetricsDetailReport,
+        classPathMap: Map<String, Path>
+    ): HtmlElement {
+        return Tag(
+            "section",
+            attributes = listOf("id" to "boundary-logic-classes"),
+            children = listOf(
+                text("h2", "Boundary Logic Classes"),
+                createBoundaryLogicTable(detailReport, classPathMap)
+            )
+        )
+    }
+
+    private fun createBoundaryLogicTable(
+        detailReport: QualityMetricsDetailReport,
+        classPathMap: Map<String, Path>
+    ): HtmlElement {
+        if (detailReport.boundaryLogicClasses.isEmpty()) {
+            return Tag("p", Text("No classes identified as boundary logic implementations."))
+        }
+
+        val rows = detailReport.boundaryLogicClasses.flatMap { classDetail ->
+            createBoundaryLogicClassRows(classDetail, classPathMap)
+        }
+
+        return Tag(
+            "table",
+            attributes = listOf("class" to "detail-table"),
+            children = listOf(
+                Tag(
+                    "thead",
+                    Tag(
+                        "tr",
+                        text("th", "Level"),
+                        Tag(
+                            "th",
+                            attributes = listOf("class" to "signature-column"),
+                            children = listOf(Text("Name/Signature"))
+                        ),
+                        text("th", "Categories")
+                    )
+                ),
+                Tag("tbody", rows)
+            )
+        )
+    }
+
+    private fun createBoundaryLogicClassRows(
+        classDetail: BoundaryLogicClassDetail,
+        classPathMap: Map<String, Path>
+    ): List<HtmlElement> {
+        val relativePath =
+            classPathMap[classDetail.className]?.toString() ?: "${classDetail.className}-disassembly.html"
+
+        val classRow = Tag(
+            "tr",
+            attributes = listOf("class" to "class-row boundary-logic-class"),
+            children = listOf(
+                text("td", "Class"),
+                Tag(
+                    "td",
+                    attributes = listOf("class" to "class-name signature-column"),
+                    children = listOf(
+                        Tag(
+                            "a",
+                            attributes = listOf("href" to relativePath),
+                            children = listOf(Text(classDetail.className))
+                        )
+                    )
+                ),
+                text("td", "${classDetail.methods.size} method(s)")
+            )
+        )
+
+        val methodRows = classDetail.methods.map { methodDetail ->
+            Tag(
+                "tr",
+                attributes = listOf("class" to "method-row boundary-logic-method"),
+                children = listOf(
+                    text("td", "Method"),
+                    Tag(
+                        "td",
+                        attributes = listOf("class" to "method-signature signature-column"),
+                        children = listOf(Text(methodDetail.methodSignature))
+                    ),
+                    text("td", methodDetail.boundaryLogicCategories.joinToString(", "))
+                )
+            )
+        }
+
+        return listOf(classRow) + methodRows
     }
 
     private fun loadResourceAsCommand(resourceName: String): Command {

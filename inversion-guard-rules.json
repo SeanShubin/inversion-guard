@@ -721,6 +721,241 @@
         }
       ]
     },
+    "static-catch-rethrow": {
+      "methodConstraints": null,
+      "rules": [
+        {
+          "type": "zero-or-more",
+          "predicate": {
+            "op": "contains",
+            "value": "load"
+          }
+        },
+        {
+          "type": "exactly",
+          "count": 1,
+          "predicate": {
+            "op": "equals",
+            "value": "invokestatic"
+          }
+        },
+        {
+          "type": "exactly",
+          "count": 1,
+          "predicate": {
+            "op": "contains",
+            "value": "return"
+          }
+        },
+        {
+          "type": "exactly",
+          "count": 1,
+          "predicate": {
+            "op": "contains",
+            "value": "store"
+          }
+        },
+        {
+          "type": "exactly",
+          "count": 1,
+          "predicate": {
+            "op": "equals",
+            "value": "new"
+          }
+        },
+        {
+          "type": "exactly",
+          "count": 1,
+          "predicate": {
+            "op": "equals",
+            "value": "dup"
+          }
+        },
+        {
+          "type": "exactly",
+          "count": 1,
+          "predicate": {
+            "op": "contains",
+            "value": "load"
+          }
+        },
+        {
+          "type": "exactly",
+          "count": 1,
+          "predicate": {
+            "op": "equals",
+            "value": "invokespecial"
+          }
+        },
+        {
+          "type": "exactly",
+          "count": 1,
+          "predicate": {
+            "op": "contains",
+            "value": "throw"
+          }
+        },
+        {
+          "type": "at-end"
+        }
+      ]
+    },
+    "static-pass-through-varargs": {
+      "methodConstraints": null,
+      "rules": [
+        {
+          "type": "zero-or-more",
+          "predicate": {
+            "op": "contains",
+            "value": "load"
+          }
+        },
+        {
+          "type": "exactly",
+          "count": 1,
+          "predicate": {
+            "op": "contains",
+            "value": "const"
+          }
+        },
+        {
+          "type": "exactly",
+          "count": 1,
+          "predicate": {
+            "op": "equals",
+            "value": "anewarray"
+          }
+        },
+        {
+          "type": "exactly",
+          "count": 1,
+          "predicate": {
+            "op": "equals",
+            "value": "invokestatic"
+          }
+        },
+        {
+          "type": "exactly",
+          "count": 1,
+          "predicate": {
+            "op": "contains",
+            "value": "return"
+          }
+        },
+        {
+          "type": "at-end"
+        }
+      ]
+    },
+    "static-catch-rethrow-void": {
+      "methodConstraints": null,
+      "rules": [
+        {
+          "type": "zero-or-more",
+          "predicate": {
+            "op": "contains",
+            "value": "load"
+          }
+        },
+        {
+          "type": "zero-or-more",
+          "predicate": {
+            "op": "contains",
+            "value": "const"
+          }
+        },
+        {
+          "type": "zero-or-more",
+          "predicate": {
+            "op": "equals",
+            "value": "anewarray"
+          }
+        },
+        {
+          "type": "exactly",
+          "count": 1,
+          "predicate": {
+            "op": "equals",
+            "value": "invokestatic"
+          }
+        },
+        {
+          "type": "exactly",
+          "count": 1,
+          "predicate": {
+            "op": "equals",
+            "value": "pop"
+          }
+        },
+        {
+          "type": "exactly",
+          "count": 1,
+          "predicate": {
+            "op": "equals",
+            "value": "goto"
+          }
+        },
+        {
+          "type": "exactly",
+          "count": 1,
+          "predicate": {
+            "op": "contains",
+            "value": "store"
+          }
+        },
+        {
+          "type": "exactly",
+          "count": 1,
+          "predicate": {
+            "op": "equals",
+            "value": "new"
+          }
+        },
+        {
+          "type": "exactly",
+          "count": 1,
+          "predicate": {
+            "op": "equals",
+            "value": "dup"
+          }
+        },
+        {
+          "type": "exactly",
+          "count": 1,
+          "predicate": {
+            "op": "contains",
+            "value": "load"
+          }
+        },
+        {
+          "type": "exactly",
+          "count": 1,
+          "predicate": {
+            "op": "equals",
+            "value": "invokespecial"
+          }
+        },
+        {
+          "type": "exactly",
+          "count": 1,
+          "predicate": {
+            "op": "contains",
+            "value": "throw"
+          }
+        },
+        {
+          "type": "exactly",
+          "count": 1,
+          "predicate": {
+            "op": "contains",
+            "value": "return"
+          }
+        },
+        {
+          "type": "at-end"
+        }
+      ]
+    },
     "singleton-getter-delegate": {
       "methodConstraints": null,
       "rules": [

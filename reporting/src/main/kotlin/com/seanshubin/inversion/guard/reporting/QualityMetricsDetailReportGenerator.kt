@@ -58,7 +58,27 @@ class QualityMetricsDetailReportGeneratorImpl : QualityMetricsDetailReportGenera
                     .thenBy { it.className }
             )
 
-        return QualityMetricsDetailReport(classes = classDetails)
+        val boundaryLogicClassDetails = analysisList
+            .filter { it.countProblems() == 0 }
+            .filter { classAnalysis -> classAnalysis.methodAnalysisList.any { it.isBoundaryLogic() } }
+            .map { classAnalysis ->
+                val methodDetails = classAnalysis.methodAnalysisList
+                    .filter { it.isBoundaryLogic() }
+                    .map { methodAnalysis ->
+                        BoundaryLogicMethodDetail(
+                            methodSignature = methodAnalysis.signature.javaFormat(),
+                            boundaryLogicCategories = methodAnalysis.boundaryLogicCategories.sorted()
+                        )
+                    }
+                    .sortedBy { it.methodSignature }
+                BoundaryLogicClassDetail(
+                    className = classAnalysis.className,
+                    methods = methodDetails
+                )
+            }
+            .sortedBy { it.className }
+
+        return QualityMetricsDetailReport(classes = classDetails, boundaryLogicClasses = boundaryLogicClassDetails)
     }
 
     private fun formatMethodSignature(methodAnalysis: MethodAnalysis): String {
