@@ -32,7 +32,7 @@ class ConfigurationLoader(
         )
         config.load(
             listOf("_documentation", "readme"),
-            "https://github.com/SeanShubin/inversion-guard/blob/master/README.md",
+            "https://<host>/<owner>/inversion-guard/blob/master/README.md",
             ConfigDocumentation.documentationReadme
         )
         config.load(
